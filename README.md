@@ -41,6 +41,19 @@ Développement futur :
 
 ** Installer MySQL
 
+** Récupérer la dernière version du projet 
+
+``` 
+git clone https://github.com/hybris71/maraichage.git
+``` 
+
+** Installer les modules
+
+Entrer dans le répertoire du projet et taper :
+```
+npm install
+```
+
 ** Configurer l'application :
 
 Créer un fichier `webconfig.json` à la racine du projet
@@ -114,6 +127,12 @@ Créer un fichier `webconfig.json` à la racine du projet
     }
 }
 ``` 
+
+** Lancer l'application 
+
+```
+node server.js
+```
 
 
 
