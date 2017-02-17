@@ -37,9 +37,16 @@ Développement futur :
 
 
 ## Installation ##
+
 ** Installer nodejs
 
 ** Installer MySQL
+
+** Importer la base
+
+```
+mysql -h localhost -u user -ppassword database_name < maraichage.sql
+```
 
 ** Récupérer la dernière version du projet 
 
@@ -50,6 +57,7 @@ git clone https://github.com/hybris71/maraichage.git
 ** Installer les modules
 
 Entrer dans le répertoire du projet et taper :
+
 ```
 npm install
 ```
