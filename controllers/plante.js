@@ -77,7 +77,10 @@ exports.setSockets = function () {
                                                 listGroupes: groupes,
                                                 index_groupe: groupes.findIndex(function (item) { return plante.id_groupe() === item.id; }),
                                                 listFamilles: familles,
-                                                index_famille: familles.findIndex(function (item) { return plante.id_famille() === item.id; })
+                                                index_famille: familles.findIndex(function (item) { return plante.id_famille() === item.id; }),
+                                                climat_favorable: locals.plante.climat_favorable(),
+                                                climat_defavorable: locals.plante.climat_defavorable(),
+                                                commentaire_climat: locals.plante.commentaire_climat()
                                             }
                                         });
 
@@ -158,7 +161,10 @@ exports.setSockets = function () {
                                                 listGroupes: groupes,
                                                 index_groupe: groupes.findIndex(function (item) { return plante.id_groupe() === item.id; }),
                                                 listFamilles: familles,
-                                                index_famille: familles.findIndex(function (item) { return plante.id_famille() === item.id; })
+                                                index_famille: familles.findIndex(function (item) { return plante.id_famille() === item.id; }),
+                                                climat_favorable: locals.plante.climat_favorable(),
+                                                climat_defavorable: locals.plante.climat_defavorable(),
+                                                commentaire_climat: locals.plante.commentaire_climat()
                                             }
                                         });
                                     });
@@ -197,7 +203,10 @@ exports.changeDom = function (next, locals) {
             listGroupes: locals.groupes,
             index_groupe: locals.groupes.findIndex(function (item) { return locals.plante.id_groupe() === item.id; }),
             listFamilles: locals.familles,
-            index_famille: locals.familles.findIndex(function (item) { return locals.plante.id_famille() === item.id; })
+            index_famille: locals.familles.findIndex(function (item) { return locals.plante.id_famille() === item.id; }),
+            climat_favorable: locals.plante.climat_favorable(),
+            climat_defavorable: locals.plante.climat_defavorable(),
+            commentaire_climat: locals.plante.commentaire_climat()
         };
     
     fs.readFile(view, "utf-8", function (error, content) {

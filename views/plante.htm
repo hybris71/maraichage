@@ -1,39 +1,133 @@
-   <div class='main'>
+   <div class='main container'>
 
         <h1><?- specific.titlePage ?></h1>
         <?- specific.content ?>
-        <button v-on:click="changeEdit" v-bind:style="styleObjectEdit">Modifier</button><button id="save" v-on:click="save" v-bind:style="styleObjectOk">Sauvegarder</button>
-        <ul>
-            <li id="id_plante" name="id_plante">Id: <strong>{{ id }}</strong></li>
+       
+        <button class="btn btn-warning" v-on:click="changeEdit" v-bind:style="styleObjectEdit">Modifier</button><button class="btn btn-danger" id="save" v-on:click="validateBeforeSave" v-bind:style="styleObjectOk">Sauvegarder</button>
+        
             <template v-if="edit === true">
-                <li>Nom: <input name="name" v-model="nom_plante"></li>
-                <li>Origine Géographique: <input name="origine" v-model="origine_geographique"></li>
-                <li>Ancienneté de culture: <input name="anciennete" v-model="anciennete_culture"></li>
-                <li>Cycle: <input name="cycle" v-model="cycle"></li>
-                <li>Description:<br><textarea rows="10" cols="80" name="description" v-model="description"></textarea></li>
-                Groupe :
-                <select v-model="index_groupe">
-                    <option v-for="(groupe, index) in listGroupes" v-bind:value="index">
-                        {{ groupe.nom }}
-                    </option>
-                </select><br>
-                Famille :
-                <select v-model="index_famille">
-                    <option v-for="(famille, index) in listFamilles" v-bind:value="index">
-                        {{ famille.nom }}
-                    </option>
-                </select>
+                <ul class="list-group">
+                <li class="list-group-item active">Généralités</li>
+                <li class="list-group-item" id="id_plante" name="id_plante">ID: <strong>{{ id }}</strong></li>
+                
+                <li class="list-group-item control has-icon has-icon-right"> 
+                    <label class="control-label">Nom de la plante</label>
+                        <input name="nom_plante" v-model="nom_plante" data-vv-as="Nom Plante" v-validate:nom_plante.initial="'required|min:3|max:50'" :class="{'input': true, 'is-danger': errors.has('nom_plante') }" type="text">
+                        <i v-show="errors.has('nom_plante')" class="fa fa-warning"></i>
+                        <span v-show="errors.has('nom_plante')" class="help is-danger">{{ errors.first('nom_plante') }}</span>
+                </li>
+                
+                <li class="list-group-item control has-icon has-icon-right"> 
+                    <label class="control-label">Origine Géographique</label>
+                        <input name="origine_geographique" v-model="origine_geographique" v-validate:origine_geographique.initial="'required|min:3|max:50'" :class="{'input': true, 'is-danger': errors.has('origine_geographique') }" type="text">
+                        <i v-show="errors.has('origine_geographique')" class="fa fa-warning"></i>
+                        <span v-show="errors.has('origine_geographique')" class="help is-danger">{{ errors.first('origine_geographique') }}</span>
+                </li>
+                
+                <li class="list-group-item control has-icon has-icon-right"> 
+                    <label class="control-label">Ancienneté de culture</label>
+                        <input name="anciennete_culture" v-model="anciennete_culture" v-validate:anciennete_culture.initial="'required|min:3|max:50'" :class="{'input': true, 'is-danger': errors.has('anciennete_culture') }" type="text">
+                        <i v-show="errors.has('anciennete_culture')" class="fa fa-warning"></i>
+                        <span v-show="errors.has('anciennete_culture')" class="help is-danger">{{ errors.first('anciennete_culture') }}</span>
+                </li>
+                
+                <li class="list-group-item control has-icon has-icon-right"> 
+                    <label class="control-label">Cycle</label>
+                        <input name="cycle" v-model="cycle" v-validate:cycle.initial="'required|min:3|max:50'" :class="{'input': true, 'is-danger': errors.has('cycle') }" type="text">
+                        <i v-show="errors.has('cycle')" class="fa fa-warning"></i>
+                        <span v-show="errors.has('cycle')" class="help is-danger">{{ errors.first('cycle') }}</span>
+                </li>
+                     
+                <li class="list-group-item control has-icon has-icon-right"> 
+                    <label class="control-label">Description</label><br>
+                        <textarea rows="10" cols="80" name="description" v-model="description" v-validate:description.initial="'required|min:3|max:400'" :class="{'input': true, 'is-danger': errors.has('description') }" type="text"></textarea>
+                        <i v-show="errors.has('description')" class="fa fa-warning"></i>
+                        <span v-show="errors.has('description')" class="help is-danger">{{ errors.first('description') }}</span>
+                </li>
+                    
+                
+                <li class="list-group-item control has-icon has-icon-right">
+                    <label class="control-label">Groupe</label>
+                        <select v-model="index_groupe">
+                            <option v-for="(groupe, index) in listGroupes" v-bind:value="index">
+                                {{ groupe.nom }}
+                            </option>
+                        </select><br>
+                </li>
+                
+                <li class="list-group-item control has-icon has-icon-right">
+                    <label class="control-label">Famille</label>
+                        <select v-model="index_famille">
+                            <option v-for="(famille, index) in listFamilles" v-bind:value="index">
+                                {{ famille.nom }}
+                            </option>
+                        </select>
+                </li>
+                    
+                <li class="list-group-item active">Climat</li>
+                    <p class="control has-icon has-icon-right">
+                        <label class="control-label">Climat favorables</label><br>
+                        <textarea name="climat_favorable" v-model="climat_favorable" v-validate:climat_favorable.initial="'required|max:100'" :class="{'input': true, 'is-danger': errors.has('climat_favorable') }" type="text"></textarea>
+                        <i v-show="errors.has('climat_favorable')" class="fa fa-warning"></i>
+                        <span v-show="errors.has('climat_favorable')" class="help is-danger">{{ errors.first('climat_favorable') }}</span>
+                    </p>
+                    
+                    <p class="control has-icon has-icon-right"> 
+                        <label class="control-label">Climat défavorable</label><br>
+                            <textarea rows="3" cols="30" name="climat_defavorable" v-model="climat_defavorable" v-validate:climat_defavorable.initial="'required|max:100'" :class="{'input': true, 'is-danger': errors.has('climat_defavorable') }" type="text" placeholder="Eléments défavorables"></textarea>
+                            <i v-show="errors.has('climat_defavorable')" class="fa fa-warning"></i>
+                            <span v-show="errors.has('climat_defavorable')" class="help is-danger">{{ errors.first('climat_defavorable') }}</span> 
+                    </p>
+                
+                    <p class="control has-icon has-icon-right"> 
+                        <label class="control-label">Commentaires sur le climat</label><br>
+                            <textarea rows="3" cols="30" name="commentaire_climat" v-model="commentaire_climat" v-validate:commentaire_climat.initial="'required|max:100'" :class="{'input': true, 'is-danger': errors.has('commentaire_climat') }" type="text" placeholder="Commentaires"></textarea>
+                            <i v-show="errors.has('commentaire_climat')" class="fa fa-warning"></i>
+                            <span v-show="errors.has('commentaire_climat')" class="help is-danger">{{ errors.first('commentaire_climat') }}</span> 
+                    </p>                
+                </ul>
             </template>
             <template v-else>
-                <li>Nom: <strong>{{ nom_plante }}</strong></li>
-                <li>Origine Géographique: <strong>{{ origine_geographique }}</strong></li>
-                <li>Ancienneté de culture: <strong>{{ anciennete_culture }}</strong></li>
-                <li>Cycle: <strong>{{ cycle }}</strong></li>
-                <li>Description: <strong>{{ description }}</strong></li>
-                <li>Groupe: <strong>{{ listGroupes[index_groupe].nom }}</strong></li>
-                <li>Famille: <strong>{{ listFamilles[index_famille].nom }}</strong></li>
+                
+                <div class = "panel panel-primary">
+                   <div class = "panel-heading">
+                      <h3 class = "panel-title">Généralités</h3>
+                   </div>
+
+                       <div class = "panel-body">
+                          <ul class="list-group">
+                              <li class="list-group-item" id="id_plante" name="id_plante"><label class="label label-info">ID</label><strong>{{ id }}</strong></li>
+                            <li class="list-group-item"><label class="label label-info">Nom de la plante</label><strong>{{ nom_plante }}</strong></li>
+                            <li class="list-group-item"><label class="label label-info">Origine Géographique</label><strong>{{ origine_geographique }}</strong></li>
+                            <li class="list-group-item"><label class="label label-info">Ancienneté de culture</label><strong>{{ anciennete_culture }}</strong></li>
+                            <li class="list-group-item"><label class="label label-info">Cycle</label><strong>{{ cycle }}</strong></li>
+                            <li class="list-group-item"><label class="label label-info">Description</label><strong>{{ description }}</strong></li>
+                            <li class="list-group-item"><label class="label label-info">Groupe</label><strong>{{ listGroupes[index_groupe].nom }}</strong></li>
+                            <li class="list-group-item"><label class="label label-info">Famille</label><strong>{{ listFamilles[index_famille].nom }}</strong></li>                
+                           </ul>
+                        </div>
+                    <div class = "panel-heading">
+                      <h3 class = "panel-title">Climat</h3>
+                    </div>
+                    <div class = "panel-body">
+                    <table class="table">
+                            <tr>
+                               <th>Conditions favorables</th>
+                               <th>Conditions défavorables</th>
+                               <th>Commentaires</th>
+                           </tr>
+                            <tr>
+                                <td>{{ climat_favorable }}</td>
+                                <td>{{ climat_defavorable }}</td>
+                                <td>{{ commentaire_climat }}</td>
+                            </tr>
+                        </table>
+                       
+                    </div>
+                </div>                 
+                
             </template>
-        </ul>
+        
 	<table>
    		<tr>
 		  <th></th>
@@ -41,13 +135,6 @@
        		  <th>Conditions défavorables</th>
        		  <th>Remarques</th>
    		</tr>
-
-		<tr>
-		<th>Climat</th>
-		<td> <?- plante.climat_favorable() ?> </td>
-		<td> <?- plante.climat_defavorable() ?> </td>
-		<td> <?- plante.commentaire_climat() ?> </td>
-		</tr>	
 		
 		<tr>
 		<th>Sol</th>

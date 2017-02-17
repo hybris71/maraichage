@@ -1,5 +1,7 @@
 var urlBasePath = document.getElementsByTagName("base")[0];
 
+Vue.use(VeeValidate);
+
 /*$(document).ready(function() {
     console.log( "ready!" );*/
     NA.socket.emit("get-plante", {
