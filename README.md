@@ -36,8 +36,84 @@ Développement futur :
 ...
 
 
+## Installation ##
+** Installer nodejs
 
+** Installer MySQL
 
+** Configurer l'application :
+
+Créer un fichier `webconfig.json` à la racine du projet
+
+```js
+{
+    "httpHostname": "127.0.0.1",
+    "httpPort": 7000,
+    "httpHostname": "domain.com",
+    "staticOptions": {
+        "maxAge": 0
+    },
+    "assetsRelativePath": "assets",
+    "variation": "common.json",
+    "variationsRelativePath": "variations",
+    "controllersRelativePath": "controllers",
+    "controller": "common.js",
+    "view": "layout.htm",
+    "statics": {
+        "/view-model": "views",
+        "/models": "models/objects"
+    },
+    "routes": {
+        "/": {
+	    "variation": "index.json",
+	    "controller": "index.js",
+	    "view": "index.htm"
+        },
+    "/rotation/": {
+			"variation": "rotation.json",
+			"controller": "rotation.js",
+			"view": "rotation.htm"
+	},
+    "/association/": {
+			"variation": "association.json",
+			"controller": "association.js",
+			"view": "association.htm"
+	},
+	"/catalogue/": {
+			"variation": "catalogue.json",
+			"controller": "catalogue.js",
+			"view": "catalogue.htm"
+	},
+    "/catalogue/add": {
+			"variation": "addplante.json",
+			"controller": "addplante.js",
+			"view": "addplante.htm"
+	},
+	"/catalogue/:plante": {
+		"variation": "plante.json",
+        "controller": "plante.js",
+        "view": "plante.htm"
+	},
+    "/catalogue/:plante/edit": {
+		"variation": "plante-edit.json",
+        "controller": "plante.js",
+        "view": "plante.htm"
+	},
+	"/catalogue/:plante/:variete": {
+		"variation": "variete.json",
+        "controller": "variete.js",
+        "view": "variete.htm"
+	}
+    },
+    "_mysqlConfig": {
+	"connectionLimit":"1000",
+        "host": "localhost",
+        "user": "root",
+        "password": "yourpassword",
+        "database": "database_name"
+    }
+}
+``` 
 
 
 
