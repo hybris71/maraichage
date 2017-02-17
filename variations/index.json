@@ -1,0 +1,15 @@
+{
+    "titlePage": "Bienvenue",
+    "classPage": "index",
+    "content": "<p>C'est la page d'accueil.</p>",
+    "todos": [{
+        "title": "v1.0",
+        "description": "Il va falloir faire la v1.0 !"
+    }, {
+        "title": "v2.0",
+        "description": "Puis faudra faire la v2.0, parce que la v1.0 on la sent déjà pas."
+    }, {
+        "title": "v3.0",
+        "description": "Il faudra faire la v3.0 parce que une fois la v2.0 fini, on voudra encore changer ce qui va pas !"
+    }]
+}

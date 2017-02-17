@@ -1,0 +1,13 @@
+    <div class="main">
+        <h1><?- specific.titlePage ?></h1>
+        <?- specific.content ?>
+   
+            <? for (var i = 0; i < catalogue.length; i++) { ?>
+            <ul>
+                <li><strong><a href="<?= urlRootPath ?>/catalogue/<?- catalogue[i].nom ?>"><?- catalogue[i].nom ?></a></strong></li>
+            </ul>
+            <? } ?>
+	
+    
+        <a href="<?= urlRootPath ?>/catalogue/add">Ajouter une nouvelle plante</a>
+     </div>

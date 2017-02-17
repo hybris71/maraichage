@@ -1,0 +1,123 @@
+   <div class='main'>
+
+        <h1><?- specific.titlePage ?></h1>
+        <?- specific.content ?>
+        <button v-on:click="changeEdit" v-bind:style="styleObjectEdit">Modifier</button><button id="save" v-on:click="save" v-bind:style="styleObjectOk">Sauvegarder</button>
+        <ul>
+            <li id="id_plante" name="id_plante">Id: <strong>{{ id }}</strong></li>
+            <template v-if="edit === true">
+                <li>Nom: <input name="name" v-model="nom_plante"></li>
+                <li>Origine Géographique: <input name="origine" v-model="origine_geographique"></li>
+                <li>Ancienneté de culture: <input name="anciennete" v-model="anciennete_culture"></li>
+                <li>Cycle: <input name="cycle" v-model="cycle"></li>
+                <li>Description:<br><textarea rows="10" cols="80" name="description" v-model="description"></textarea></li>
+                Groupe :
+                <select v-model="index_groupe">
+                    <option v-for="(groupe, index) in listGroupes" v-bind:value="index">
+                        {{ groupe.nom }}
+                    </option>
+                </select><br>
+                Famille :
+                <select v-model="index_famille">
+                    <option v-for="(famille, index) in listFamilles" v-bind:value="index">
+                        {{ famille.nom }}
+                    </option>
+                </select>
+            </template>
+            <template v-else>
+                <li>Nom: <strong>{{ nom_plante }}</strong></li>
+                <li>Origine Géographique: <strong>{{ origine_geographique }}</strong></li>
+                <li>Ancienneté de culture: <strong>{{ anciennete_culture }}</strong></li>
+                <li>Cycle: <strong>{{ cycle }}</strong></li>
+                <li>Description: <strong>{{ description }}</strong></li>
+                <li>Groupe: <strong>{{ listGroupes[index_groupe].nom }}</strong></li>
+                <li>Famille: <strong>{{ listFamilles[index_famille].nom }}</strong></li>
+            </template>
+        </ul>
+	<table>
+   		<tr>
+		  <th></th>
+       		  <th>Conditions favorables</th>
+       		  <th>Conditions défavorables</th>
+       		  <th>Remarques</th>
+   		</tr>
+
+		<tr>
+		<th>Climat</th>
+		<td> <?- plante.climat_favorable() ?> </td>
+		<td> <?- plante.climat_defavorable() ?> </td>
+		<td> <?- plante.commentaire_climat() ?> </td>
+		</tr>	
+		
+		<tr>
+		<th>Sol</th>
+		<td> <?- plante.sol_favorable() ?> </td>
+		<td> <?- plante.sol_defavorable() ?> </td>
+		<td> <?- plante.commentaire_sol() ?> </td>
+		</tr>	
+		
+				
+		<tr>
+		<th>Fertilisation</th>
+		<td> <?- plante.fertilisation_favorable() ?> </td>
+		<td> <?- plante.fertilisation_defavorable() ?> </td>
+		<td> <?- plante.commentaire_fertilisation() ?> </td>
+		</tr>	
+
+        <tr>
+		<th>Rotation (Durée, précédents conseillées) </th>
+            <td><? for (var i = 0; i < plante.get_rotation_familles_favorables().length; i++) { ?>
+                <?- plante.get_rotation_familles_favorables()[i].nom ?> <? } ?> - <? for (var i = 0; i < plante.get_rotation_plantes_favorables().length; i++) { ?>
+                <?- plante.get_rotation_plantes_favorables()[i].nom ?> <? } ?> -
+                <?- plante.rotation_duree_mini() ?> ans.</td>
+            <td><? for (var i = 0; i < plante.get_rotation_familles_defavorables().length; i++) { ?>
+                <?- plante.get_rotation_familles_defavorables()[i].nom ?> <? } ?> - <? for (var i = 0; i < plante.get_rotation_plantes_defavorables().length; i++) { ?>
+                <?- plante.get_rotation_plantes_defavorables()[i].nom ?> <? } ?> </td>
+            <td> <?- plante.commentaire_duree() ?> </td>
+		</tr>
+        
+        <tr>
+        <th>Associations (Avec d'autres légumes) </th>
+            <td><? for (var i = 0; i < plante.get_plantes_associations_favorables().length; i++) { ?>
+                <?- plante.get_plantes_associations_favorables()[i].nom ?> <? } ?></td>
+            <td><? for (var i = 0; i < plante.get_plantes_associations_defavorables().length; i++) { ?>
+                <?- plante.get_plantes_associations_defavorables()[i].nom ?> <? } ?></td>
+            <td>  </td>
+		</tr>	
+
+	</table>
+    <br>
+        Exportation ou mobilisation approximative en kg/ha
+    <br>
+    <br>
+    <table>
+   		<tr>
+       	    <th>Rendement retenu/ha</th>
+       	    <th>N</th>
+       	    <th>P2O5</th>
+            <th>K2O</th>
+            <th>CaO</th>
+            <th>MgO</th>
+   		</tr>
+		<tr>
+            <td> <?- plante.rendement() ?> tonnes</td>
+            <td> <?- plante.azote() ?> </td>
+            <td> <?- plante.phosphore() ?> </td>
+            <td> <?- plante.potassium() ?> </td>
+            <td> <?- plante.calcium() ?> </td>
+            <td> <?- plante.magnesium() ?> </td>
+        </tr>
+        </table>
+    
+        
+    <div>
+    <h2>Listes des variétés disponibles :</h2>
+        
+     <? for (var i = 0; i < plante.get_list_variete().length; i++) { ?>
+            <ul>
+                <li><strong><a href="<?- urlPath ?>/<?- plante.get_list_variete()[i] ?>"><?- plante.get_list_variete()[i] ?></a></strong></li>
+            </ul>
+            <? } ?>
+    </div>
+
+</div>

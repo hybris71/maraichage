@@ -1,0 +1,98 @@
+    <div class="main">
+        <h1><?- specific.titlePage ?></h1>
+        <?- specific.content ?>
+   
+        <form action="" method="post">
+        <select id="list_plantes" name="plante">
+             <? for (var i = 0; i < catalogue.length; i++) { ?>
+                    <option value="<?- catalogue[i].nom ?>"><?- catalogue[i].nom ?></option>
+             <? } ?>
+        </select>
+        <input type="submit" value="Valider"><br>
+        </form>
+        <h2>Rotation <?- plante.nom_plante() ?></h2>
+        <table border="0">
+	       <tr>
+		        <td rowspan="2">
+                    <fieldset><legend>Liste des familles</legend>
+                        <select name="familles" size="<?- listFamilles.length ?>" >
+                            <? for (var i = 0; i < listFamilles.length; i++) { ?>
+                                <option value="<?- listFamilles[i].id ?>"><?- listFamilles[i].nom ?></option>
+                            <? } ?>
+                        </select>
+                    </fieldset>
+                </td>
+                <td align="center" valign="middle">
+			         <input type="button" id="addFamilleFavorable" value="--&gt;" /><br />
+			         <input type="button" id="delFamilleFavorable" value="&lt;--" />
+                </td>
+               <td>
+                    <fieldset><legend>Précédents Familles favorables</legend>
+                        <input type="hidden" name="plante" value="<?- plante.nom_plante() ?>">
+                        <select name="rotationFamillesFavorables" size="5" >
+                             <? for (var i = 0; i < plante.get_rotation_familles_favorables().length; i++) { ?> 
+                                    <option value="<?- plante.get_rotation_familles_favorables()[i].id ?>"><?- plante.get_rotation_familles_favorables()[i].nom ?></option>
+                             <? } ?>
+                        </select>
+                    </fieldset>
+                </td> 
+            </tr>
+            <tr>
+               <td align="center" valign="middle">
+                     <input type="button" id="addFamilleDefavorable" value="--&gt;" /><br />
+			         <input type="button" id="delFamilleDefavorable" value="&lt;--" />
+		       </td>
+                <td>
+                    <fieldset><legend>Précédents Familles défavorables</legend>
+                        <input type="hidden" name="plante" value="<?- plante.nom_plante() ?>">
+                        <select name="rotationFamillesDefavorables" size="5" >
+                             <? for (var i = 0; i < plante.get_rotation_familles_defavorables().length; i++) { ?> 
+                                    <option value="<?- plante.get_rotation_familles_defavorables()[i].id ?>"><?- plante.get_rotation_familles_defavorables()[i].nom ?></option>
+                             <? } ?>
+                        </select>
+                    </fieldset>
+                </td>
+	       </tr>
+        </table>
+        <br />
+        <table border="0">
+	       <tr>
+		      <td rowspan="2">
+                    <fieldset><legend>Liste des plantes</legend>
+                        <select name="listplantes" size="<?- listPlantes.length ?>" >
+                            <? for (var i = 0; i < listPlantes.length; i++) { ?>
+                                <option value="<?- listPlantes[i].id ?>"><?- listPlantes[i].nom ?></option>
+                            <? } ?>
+                        </select>
+                    </fieldset>
+                <td align="center" valign="middle">
+			         <input type="button" id="addPlanteFavorable" value="--&gt;" /><br />
+			         <input type="button" id="delPlanteFavorable" value="&lt;--" />
+		        </td>
+                <td>
+                        <fieldset><legend>Précédents Plantes favorables</legend>
+                            <select name="rotationPlantesFavorables" size="5" >
+                                 <? for (var i = 0; i < plante.get_rotation_plantes_favorables().length; i++) { ?> 
+                                        <option value="<?- plante.get_rotation_plantes_favorables()[i].id ?>"><?- plante.get_rotation_plantes_favorables()[i].nom ?></option>
+                                 <? } ?>
+                            </select>
+                        </fieldset>
+                </td>
+	       </tr>
+            <tr>
+                <td align="center" valign="middle">
+			         <input type="button" id="addPlanteDefavorable" value="--&gt;" /><br />
+			         <input type="button" id="delPlanteDefavorable" value="&lt;--" />
+		        </td>
+                <td>
+                        <fieldset><legend>Précédents Plantes défavorables</legend>
+                            <select name="rotationPlantesDefavorables" size="5" >
+                                 <? for (var i = 0; i < plante.get_rotation_plantes_defavorables().length; i++) { ?> 
+                                        <option value="<?- plante.get_rotation_plantes_defavorables()[i].id ?>"><?- plante.get_rotation_plantes_defavorables()[i].nom ?></option>
+                                 <? } ?>
+                            </select>
+                        </fieldset>
+                </td>
+            </tr>
+        </table>
+     </div>

@@ -1,0 +1,58 @@
+    <div class="main">
+        <h1><?- specific.titlePage ?></h1>
+        <?- specific.content ?>
+	   
+        
+        <form action="" method="post">
+        <select id="list_plantes" name="plante">
+             <? for (var i = 0; i < catalogue.length; i++) { ?>
+                    <option value="<?- catalogue[i].nom ?>"><?- catalogue[i].nom ?></option>
+             <? } ?>
+        </select>
+        <input type="submit" value="Valider"><br>
+        </form>
+        <h2>Rotation <?- plante.nom_plante() ?></h2>
+        <input type="hidden" name="plante" value="<?- plante.nom_plante() ?>">
+        <table border="0">
+	       <tr>
+		        <td rowspan="2">
+                    <fieldset><legend>Liste des plantes</legend>
+                        <select name="plantes" size="<?- listPlantes.length ?>" >
+                            <? for (var i = 0; i < listPlantes.length; i++) { ?>
+                                <option value="<?- listPlantes[i].id ?>"><?- listPlantes[i].nom ?></option>
+                            <? } ?>
+                        </select>
+                    </fieldset>
+                </td>
+                <td align="center" valign="middle">
+			         <input type="button" id="addAssoFavorable" value="--&gt;" /><br />
+			         <input type="button" id="delAssoFavorable" value="&lt;--" />
+                </td>
+               <td>
+                    <fieldset><legend>Associations favorables</legend>
+                        <select name="associationsFavorables" size="5" >
+                             <? for (var i = 0; i < plante.get_plantes_associations_favorables().length; i++) { ?> 
+                                    <option value="<?- plante.get_plantes_associations_favorables()[i].id ?>"><?- plante.get_plantes_associations_favorables()[i].nom ?></option>
+                             <? } ?>
+                        </select>
+                    </fieldset>
+                </td> 
+            </tr>
+            <tr>
+               <td align="center" valign="middle">
+                     <input type="button" id="addAssoDefavorable" value="--&gt;" /><br />
+			         <input type="button" id="delAssoDefavorable" value="&lt;--" />
+		       </td>
+                <td>
+                    <fieldset><legend>Associations défavorables</legend>
+                        <select name="associationsDefavorables" size="5" >
+                             <? for (var i = 0; i < plante.get_plantes_associations_defavorables().length; i++) { ?> 
+                                    <option value="<?- plante.get_plantes_associations_defavorables()[i].id ?>"><?- plante.get_plantes_associations_defavorables()[i].nom ?></option>
+                             <? } ?>
+                        </select>
+                    </fieldset>
+                </td>
+	       </tr>
+        </table>
+		
+    </div>

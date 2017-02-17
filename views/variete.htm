@@ -1,0 +1,60 @@
+    <div class="main">
+        <h1><?- specific.titlePage ?></h1>
+        <?- specific.content ?>
+
+	#<?- variete.id_variete() ?> Variété <?- variete.nom_variete() ?> 
+        
+            <fieldset><legend>Description</legend>
+                <?- variete.description() ?>  
+            </fieldset>
+        
+            <fieldset><legend>Graines</legend>
+                Durée de vie : <?- variete.graine_duree_vie() ?> <br>
+                PMG : <?- variete.graine_pmg() ?> <br>
+                Taux de germination : <?- variete.graine_taux_germination() ?> <br>
+                Prix approximatif : <?- variete.graine_prix() ?> <br>
+            </fieldset>
+        
+            <fieldset><legend>Semi</legend>
+                Modalité : <?- variete.type_semi_description() ?> <br>
+                Debut : <?- variete.debut_semi() ?> <br>
+                Fin : <?- variete.fin_semi() ?> <br>
+                Profondeur : <?- variete.fin_semi() ?> <br>
+                Temperature Germination : <?- variete.temperature_germination() ?> <br>
+                Temps de levée en jour : <?- variete.temps_levee_jour() ?> <br>
+            </fieldset>
+
+            <fieldset><legend>Densité</legend>
+                Distance entre les rangs : <?- variete.distance_entre_rang() ?> <br>
+                Distance sur le rang : <?- variete.distance_sur_rang() ?> <br>
+            </fieldset>
+
+            <fieldset><legend>Repiquage</legend>
+                Début du repiquage : <?- variete.debut_repi() ?> <br>
+                Fin du repiquage : <?- variete.fin_repi() ?> <br>
+                Commentaire : <?- variete.repi_commentaire() ?> <br>
+            </fieldset>
+
+            <fieldset><legend>Récolte</legend>
+                Début de la récolte : <?- variete.debut_recolte() ?> <br>
+                Fin de la récolte : <?- variete.fin_recolte() ?> <br>
+                Déroulement : <?- variete.recolte_deroulement() ?> <br>
+                Commentaire : <?- variete.recolte_commentaire() ?> <br>
+                Fréquence : <?- variete.recolte_frequence() ?> <br>
+            </fieldset>
+
+            <fieldset><legend>Abri</legend>
+                Type : <?- variete.tunnel_type() ?> <br>
+                Début : <?- variete.tunnel_debut() ?> <br>
+                Fin : <?- variete.tunnel_fin() ?> <br>
+            </fieldset>
+
+            <fieldset><legend>Stockage</legend>
+                Local : <?- variete.stockage_local() ?> <br>
+                Durée de conservation : <?- variete.stockage_duree_conservation() ?> <br>
+                Température : <?- variete.stockage_temperature() ?> <br>
+                Aération : <?- variete.stockage_aeration() ?> <br>
+                Hygrométrie : <?- variete.stockage_hygrometrie() ?> <br>
+            </fieldset>
+		
+    </div>
