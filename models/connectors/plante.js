@@ -221,23 +221,25 @@ function Plante(connection) {
                         PC.climat_favorable AS climat_favorable,
                         PC.climat_defavorable AS climat_defavorable,
                         PC.commentaire_climat AS commentaire_climat,
+                        PC.temp_gel AS temp_gel,
                         PC.sol_favorable AS sol_favorable,
                         PC.sol_defavorable AS sol_defavorable,
                         PC.commentaire_sol AS commentaire_sol,
                         PC.fertilisation_favorable AS fertilisation_favorable,
                         PC.fertilisation_defavorable AS fertilisation_defavorable,
                         PC.commentaire_fertilisation AS commentaire_fertilisation,
-                    PL_ASS.nom AS plantes_association,
-                    ASSO.ref_plante_asso AS association_ref_plante,
-                    ASSO.favorable AS plantes_asso_tag,
+                        PC.fumier_frais AS fumier_frais,
+                        PL_ASS.nom AS plantes_association,
+                        ASSO.ref_plante_asso AS association_ref_plante,
+                        ASSO.favorable AS plantes_asso_tag,
                         RD.duree_mini AS rotation_duree_mini,
                         RD.commentaire_duree AS commentaire_duree,
-                    FMR.nom_famille AS rotation_famille,
-                    RF.ref_famille AS rotation_ref_famille,
+                        FMR.nom_famille AS rotation_famille,
+                        RF.ref_famille AS rotation_ref_famille,
                         RF.favorable AS rotation_famille_tag,
-                    PLR.nom AS rotation_plante,
-                    RP.ref_plante_condition AS rotation_ref_plante,
-                    RP.favorable AS rotation_plante_tag,
+                        PLR.nom AS rotation_plante,
+                        RP.ref_plante_condition AS rotation_ref_plante,
+                        RP.favorable AS rotation_plante_tag,
                         VR.nom_variete AS nom_variete,
                         EXP.rendement AS rendement,
                         EXP.azote AS azote,
@@ -290,12 +292,14 @@ function Plante(connection) {
                 publics.climat_favorable(rows[0].climat_favorable);
                 publics.climat_defavorable(rows[0].climat_defavorable);
                 publics.commentaire_climat(rows[0].commentaire_climat);
+                publics.temp_gel(rows[0].temp_gel);
                 publics.sol_favorable(rows[0].sol_favorable);
                 publics.sol_defavorable(rows[0].sol_defavorable);
                 publics.commentaire_sol(rows[0].commentaire_sol);
                 publics.fertilisation_favorable(rows[0].fertilisation_favorable);
                 publics.fertilisation_defavorable(rows[0].fertilisation_defavorable);
                 publics.commentaire_fertilisation(rows[0].commentaire_fertilisation);
+                publics.fumier_frais(rows[0].fumier_frais);
                 publics.rotation_duree_mini(rows[0].rotation_duree_mini);
                 publics.commentaire_duree(rows[0].commentaire_duree);
                 publics.rendement(rows[0].rendement);
@@ -560,6 +564,97 @@ function Plante(connection) {
             if (user.town()) { publics.town(user.town()); }
             if (user.zipcode()) { publics.zipcode(user.zipcode()); }
             if (user.address()) { publics.address(user.address()); }*/
+
+            if (callback) {
+                callback(infos);
+            }
+        });
+
+        return publics;
+    };
+    
+    publics.udpate_pedoclimat = function (callback) {
+        var update = "UPDATE pedoclimat SET",
+            where = "";
+    
+        if (publics.climat_favorable()) { update += '`climat_favorable` = "' + publics.climat_favorable() + '", '; }
+        if (publics.climat_defavorable()) { update += '`climat_defavorable` = "' + publics.climat_defavorable() + '", '; }
+        if (publics.commentaire_climat()) { update += '`commentaire_climat` = "' + publics.commentaire_climat() + '", '; }
+        if (publics.sol_favorable()) { update += '`sol_favorable` = "' + publics.sol_favorable() + '", '; }
+        if (publics.sol_defavorable()) { update += '`sol_defavorable` = "' + publics.sol_defavorable() + '", '; }
+        if (publics.commentaire_sol()) { update += '`commentaire_sol` = "' + publics.commentaire_sol() + '", '; }
+        if (publics.fertilisation_favorable()) { update += '`fertilisation_favorable` = "' + publics.fertilisation_favorable() + '", '; }
+        if (publics.fertilisation_defavorable()) { update += '`fertilisation_defavorable` = "' + publics.fertilisation_defavorable() + '", '; }
+        if (publics.commentaire_fertilisation()) { update += '`commentaire_fertilisation` = "' + publics.commentaire_fertilisation() + '", '; }
+        if (publics.temp_gel()) { update += '`temp_gel` = "' + publics.temp_gel() + '", '; }
+        if (publics.fumier_frais()) { update += '`fumier_frais` = "' + publics.fumier_frais() + '", '; }
+
+        update = update.replace(/, $/g, "");
+
+        if (publics.id_plante()) { where += ' && `ref_plante` = ' + publics.id_plante(); }
+
+        where = where.replace("&&", "WHERE");
+
+        privates.connection.query(update + where, function (err, infos) {
+            if (err) { 
+                throw err;
+            }
+
+            if (callback) {
+                callback(infos);
+            }
+        });
+
+        return publics;
+    };
+    
+    publics.update_rotation_duree = function (callback) {
+        var update = "UPDATE rotation_duree SET",
+            where = "";
+    
+        if (publics.rotation_duree_mini()) { update += '`duree_mini` = "' + publics.rotation_duree_mini() + '", '; }
+        if (publics.commentaire_duree()) { update += '`commentaire_duree` = "' + publics.commentaire_duree() + '", '; }
+
+        update = update.replace(/, $/g, "");
+
+        if (publics.id_plante()) { where += ' && `ref_plante` = ' + publics.id_plante(); }
+
+        where = where.replace("&&", "WHERE");
+
+        privates.connection.query(update + where, function (err, infos) {
+            if (err) { 
+                throw err;
+            }
+
+            if (callback) {
+                callback(infos);
+            }
+        });
+
+        return publics;
+    };
+    
+    publics.update_exportations = function (callback) {
+        var update = "UPDATE exportations SET",
+            where = "";
+    
+        if (publics.rendement()) { update += '`rendement` = "' + publics.rendement() + '", '; }
+        if (publics.azote()) { update += '`azote` = "' + publics.azote() + '", '; }
+        if (publics.phosphore()) { update += '`phosphore` = "' + publics.phosphore() + '", '; }
+        if (publics.potassium()) { update += '`potassium` = "' + publics.potassium() + '", '; }
+        if (publics.calcium()) { update += '`calcium` = "' + publics.calcium() + '", '; }
+        if (publics.magnesium()) { update += '`magnesium` = "' + publics.magnesium() + '", '; }
+
+        update = update.replace(/, $/g, "");
+
+        if (publics.id_plante()) { where += ' && `ref_plante` = ' + publics.id_plante(); }
+
+        where = where.replace("&&", "WHERE");
+
+        privates.connection.query(update + where, function (err, infos) {
+            if (err) { 
+                throw err;
+            }
 
             if (callback) {
                 callback(infos);

@@ -10,81 +10,203 @@
                 <li class="list-group-item active">Généralités</li>
                 <li class="list-group-item" id="id_plante" name="id_plante">ID: <strong>{{ id }}</strong></li>
                 
-                <li class="list-group-item control has-icon has-icon-right"> 
+                <p class="list-group-item control has-icon has-icon-right"> 
                     <label class="control-label">Nom de la plante</label>
                         <input name="nom_plante" v-model="nom_plante" data-vv-as="Nom Plante" v-validate:nom_plante.initial="'required|min:3|max:50'" :class="{'input': true, 'is-danger': errors.has('nom_plante') }" type="text">
                         <i v-show="errors.has('nom_plante')" class="fa fa-warning"></i>
                         <span v-show="errors.has('nom_plante')" class="help is-danger">{{ errors.first('nom_plante') }}</span>
-                </li>
+                </p>
                 
-                <li class="list-group-item control has-icon has-icon-right"> 
+                <p class="list-group-item control has-icon has-icon-right"> 
                     <label class="control-label">Origine Géographique</label>
                         <input name="origine_geographique" v-model="origine_geographique" v-validate:origine_geographique.initial="'required|min:3|max:50'" :class="{'input': true, 'is-danger': errors.has('origine_geographique') }" type="text">
                         <i v-show="errors.has('origine_geographique')" class="fa fa-warning"></i>
                         <span v-show="errors.has('origine_geographique')" class="help is-danger">{{ errors.first('origine_geographique') }}</span>
-                </li>
+                </p>
                 
-                <li class="list-group-item control has-icon has-icon-right"> 
+                <p class="list-group-item control has-icon has-icon-right"> 
                     <label class="control-label">Ancienneté de culture</label>
                         <input name="anciennete_culture" v-model="anciennete_culture" v-validate:anciennete_culture.initial="'required|min:3|max:50'" :class="{'input': true, 'is-danger': errors.has('anciennete_culture') }" type="text">
                         <i v-show="errors.has('anciennete_culture')" class="fa fa-warning"></i>
                         <span v-show="errors.has('anciennete_culture')" class="help is-danger">{{ errors.first('anciennete_culture') }}</span>
-                </li>
+                </p>
                 
-                <li class="list-group-item control has-icon has-icon-right"> 
+                <p class="list-group-item control has-icon has-icon-right"> 
                     <label class="control-label">Cycle</label>
                         <input name="cycle" v-model="cycle" v-validate:cycle.initial="'required|min:3|max:50'" :class="{'input': true, 'is-danger': errors.has('cycle') }" type="text">
                         <i v-show="errors.has('cycle')" class="fa fa-warning"></i>
                         <span v-show="errors.has('cycle')" class="help is-danger">{{ errors.first('cycle') }}</span>
-                </li>
+                </p>
                      
-                <li class="list-group-item control has-icon has-icon-right"> 
+                <p class="list-group-item control has-icon has-icon-right"> 
                     <label class="control-label">Description</label><br>
                         <textarea rows="10" cols="80" name="description" v-model="description" v-validate:description.initial="'required|min:3|max:400'" :class="{'input': true, 'is-danger': errors.has('description') }" type="text"></textarea>
                         <i v-show="errors.has('description')" class="fa fa-warning"></i>
                         <span v-show="errors.has('description')" class="help is-danger">{{ errors.first('description') }}</span>
-                </li>
+                </p>
                     
                 
-                <li class="list-group-item control has-icon has-icon-right">
+                <p class="list-group-item control has-icon has-icon-right">
                     <label class="control-label">Groupe</label>
                         <select v-model="index_groupe">
                             <option v-for="(groupe, index) in listGroupes" v-bind:value="index">
                                 {{ groupe.nom }}
                             </option>
                         </select><br>
-                </li>
+                </p>
                 
-                <li class="list-group-item control has-icon has-icon-right">
+                <p class="list-group-item control has-icon has-icon-right">
                     <label class="control-label">Famille</label>
                         <select v-model="index_famille">
                             <option v-for="(famille, index) in listFamilles" v-bind:value="index">
                                 {{ famille.nom }}
                             </option>
                         </select>
-                </li>
+                </p>
                     
                 <li class="list-group-item active">Climat</li>
-                    <p class="control has-icon has-icon-right">
+                    <p class="list-group-item control has-icon has-icon-right">
                         <label class="control-label">Climat favorables</label><br>
-                        <textarea name="climat_favorable" v-model="climat_favorable" v-validate:climat_favorable.initial="'required|max:100'" :class="{'input': true, 'is-danger': errors.has('climat_favorable') }" type="text"></textarea>
+                        <textarea rows="3" cols="30" name="climat_favorable" v-model="climat_favorable" v-validate:climat_favorable.initial="'required|max:100'" :class="{'input': true, 'is-danger': errors.has('climat_favorable') }" type="text"></textarea>
                         <i v-show="errors.has('climat_favorable')" class="fa fa-warning"></i>
                         <span v-show="errors.has('climat_favorable')" class="help is-danger">{{ errors.first('climat_favorable') }}</span>
                     </p>
                     
-                    <p class="control has-icon has-icon-right"> 
+                    <p class="list-group-item control has-icon has-icon-right"> 
                         <label class="control-label">Climat défavorable</label><br>
                             <textarea rows="3" cols="30" name="climat_defavorable" v-model="climat_defavorable" v-validate:climat_defavorable.initial="'required|max:100'" :class="{'input': true, 'is-danger': errors.has('climat_defavorable') }" type="text" placeholder="Eléments défavorables"></textarea>
                             <i v-show="errors.has('climat_defavorable')" class="fa fa-warning"></i>
                             <span v-show="errors.has('climat_defavorable')" class="help is-danger">{{ errors.first('climat_defavorable') }}</span> 
                     </p>
                 
-                    <p class="control has-icon has-icon-right"> 
+                    <p class="list-group-item control has-icon has-icon-right"> 
                         <label class="control-label">Commentaires sur le climat</label><br>
                             <textarea rows="3" cols="30" name="commentaire_climat" v-model="commentaire_climat" v-validate:commentaire_climat.initial="'required|max:100'" :class="{'input': true, 'is-danger': errors.has('commentaire_climat') }" type="text" placeholder="Commentaires"></textarea>
                             <i v-show="errors.has('commentaire_climat')" class="fa fa-warning"></i>
                             <span v-show="errors.has('commentaire_climat')" class="help is-danger">{{ errors.first('commentaire_climat') }}</span> 
-                    </p>                
+                    </p>
+                    
+                    <p class="list-group-item control has-icon has-icon-right">
+                        <label class="control-label">Gel en dessous de :</label><br>
+                        <input type="number" name="temp_gel" min="-30" max="20" v-model="temp_gel" >
+                    </p>
+                    
+                <li class="list-group-item active">Sol</li>
+                    <p class="list-group-item control has-icon has-icon-right">
+                        <label class="control-label">Sol favorables</label><br>
+                        <textarea rows="3" cols="30" name="sol_favorable" v-model="sol_favorable" v-validate:sol_favorable.initial="'required|max:100'" :class="{'input': true, 'is-danger': errors.has('sol_favorable') }" type="text"></textarea>
+                        <i v-show="errors.has('sol_favorable')" class="fa fa-warning"></i>
+                        <span v-show="errors.has('sol_favorable')" class="help is-danger">{{ errors.first('sol_favorable') }}</span>
+                    </p>
+                    
+                    <p class="list-group-item control has-icon has-icon-right"> 
+                        <label class="control-label">Sol défavorable</label><br>
+                            <textarea rows="3" cols="30" name="sol_defavorable" v-model="sol_defavorable" v-validate:sol_defavorable.initial="'required|max:100'" :class="{'input': true, 'is-danger': errors.has('sol_defavorable') }" type="text" placeholder="Eléments défavorables"></textarea>
+                            <i v-show="errors.has('sol_defavorable')" class="fa fa-warning"></i>
+                            <span v-show="errors.has('sol_defavorable')" class="help is-danger">{{ errors.first('sol_defavorable') }}</span> 
+                    </p>
+                
+                    <p class="list-group-item control has-icon has-icon-right"> 
+                        <label class="control-label">Commentaires sur le sol</label><br>
+                            <textarea rows="3" cols="30" name="commentaire_sol" v-model="commentaire_sol" v-validate:commentaire_sol.initial="'required|max:100'" :class="{'input': true, 'is-danger': errors.has('commentaire_sol') }" type="text" placeholder="Commentaires"></textarea>
+                            <i v-show="errors.has('commentaire_sol')" class="fa fa-warning"></i>
+                            <span v-show="errors.has('commentaire_sol')" class="help is-danger">{{ errors.first('commentaire_sol') }}</span> 
+                    </p>
+                    
+                    <li class="list-group-item active">Fertilisation</li>
+                        <p class="list-group-item control has-icon has-icon-right">
+                            <label class="control-label">Fertilisation favorables</label><br>
+                            <textarea rows="3" cols="30" name="fertilisation_favorable" v-model="fertilisation_favorable" v-validate:fertilisation_favorable.initial="'required|max:100'" :class="{'input': true, 'is-danger': errors.has('fertilisation_favorable') }" type="text"></textarea>
+                            <i v-show="errors.has('fertilisation_favorable')" class="fa fa-warning"></i>
+                            <span v-show="errors.has('fertilisation_favorable')" class="help is-danger">{{ errors.first('fertilisation_favorable') }}</span>
+                        </p>
+
+                        <p class="list-group-item control has-icon has-icon-right"> 
+                            <label class="control-label">Fertilisation défavorable</label><br>
+                                <textarea rows="3" cols="30" name="fertilisation_defavorable" v-model="fertilisation_defavorable" v-validate:fertilisation_defavorable.initial="'required|max:100'" :class="{'input': true, 'is-danger': errors.has('fertilisation_defavorable') }" type="text" placeholder="Eléments défavorables"></textarea>
+                                <i v-show="errors.has('fertilisation_defavorable')" class="fa fa-warning"></i>
+                                <span v-show="errors.has('fertilisation_defavorable')" class="help is-danger">{{ errors.first('fertilisation_defavorable') }}</span> 
+                        </p>
+
+                        <p class="list-group-item control has-icon has-icon-right"> 
+                            <label class="control-label">Commentaires sur la fertilisation</label><br>
+                                <textarea rows="3" cols="30" name="commentaire_fertilisation" v-model="commentaire_fertilisation" v-validate:commentaire_fertilisation.initial="'required|max:100'" :class="{'input': true, 'is-danger': errors.has('commentaire_fertilisation') }" type="text" placeholder="Commentaires"></textarea>
+                                <i v-show="errors.has('commentaire_fertilisation')" class="fa fa-warning"></i>
+                                <span v-show="errors.has('commentaire_fertilisation')" class="help is-danger">{{ errors.first('commentaire_fertilisation') }}</span> 
+                        </p>
+                        
+                        <p class="list-group-item control has-icon has-icon-right">
+                            <label class="control-label">La plante supporte-t-elle le fumier frais ?</label>
+                            <label>
+                                <input name="fumier_frais" v-validate="'required|in:1,0'" value="1" type="radio" v-model="fumier_frais">
+                                Oui
+                            </label>
+                            <label>
+                                <input name="fumier_frais" value="0" type="radio" v-model="fumier_frais">
+                                Non
+                            </label>
+                            <span v-show="errors.has('fumier_frais')" class="help is-danger">{{ errors.first('fumier_frais') }}</span>
+                        </p>
+                    
+                        <li class="list-group-item active">Rotation</li>
+                        <p class="list-group-item control has-icon has-icon-right">
+                            <label class="control-label">Nombre d'années avant de recultiver sur la même planche</label>
+                            <input v-validate:rotation_duree_mini.initial="'required|decimal'" :class="{'input': true, 'is-danger': errors.has('rotation_duree_mini') }" type="number" name="rotation_duree_mini" min="0" max="10" v-model="rotation_duree_mini">
+                            <i v-show="errors.has('rotation_duree_mini')" class="fa fa-warning"></i>
+                            <span v-show="errors.has('rotation_duree_mini')" class="help is-danger">{{ errors.first('rotation_duree_mini') }}</span>
+                        </p>
+
+                        <p class="list-group-item control has-icon has-icon-right"> 
+                            <label class="control-label">Commentaires</label><br>
+                            <textarea rows="3" cols="30" name="commentaire_duree" v-model="commentaire_duree" v-validate:commentaire_duree.initial="'required|max:100'" :class="{'input': true, 'is-danger': errors.has('commentaire_duree') }" type="text" placeholder="Commentaires"></textarea>
+                            <i v-show="errors.has('commentaire_duree')" class="fa fa-warning"></i>
+                            <span v-show="errors.has('commentaire_duree')" class="help is-danger">{{ errors.first('commentaire_duree') }}</span> 
+                        </p>
+                    
+                        <li class="list-group-item active">Exportation</li>
+                        <p class="list-group-item control has-icon has-icon-right">
+                            <label class="control-label">Rendement retenu en tonne par hectare</label>
+                            <input v-validate:rendement.initial="'required|decimal'" :class="{'input': true, 'is-danger': errors.has('rendement') }" type="number" name="rendement" v-model="rendement" min="0" max="100">
+                            <i v-show="errors.has('rendement')" class="fa fa-warning"></i>
+                            <span v-show="errors.has('rendement')" class="help is-danger">{{ errors.first('rendement') }}</span>
+                        </p>
+                    
+                        <p class="list-group-item control has-icon has-icon-right">
+                            <label class="control-label">N</label>
+                            <input v-validate:azote.initial="'required|decimal'" :class="{'input': true, 'is-danger': errors.has('azote') }" type="number" name="azote" v-model="azote" min="0" max="600">
+                            <i v-show="errors.has('azote')" class="fa fa-warning"></i>
+                            <span v-show="errors.has('azote')" class="help is-danger">{{ errors.first('azote') }}</span>
+                        </p>
+                    
+                        <p class="list-group-item control has-icon has-icon-right">
+                            <label class="control-label">P2O5</label>
+                            <input v-validate:phosphore.initial="'required|decimal'" :class="{'input': true, 'is-danger': errors.has('phosphore') }" type="number" name="phosphore" v-model="phosphore" min="0" max="600">
+                            <i v-show="errors.has('phosphore')" class="fa fa-warning"></i>
+                            <span v-show="errors.has('phosphore')" class="help is-danger">{{ errors.first('phosphore') }}</span>
+                        </p>
+                            
+                        <p class="list-group-item control has-icon has-icon-right">
+                            <label class="control-label">K2O</label>
+                            <input v-validate:potassium.initial="'required|decimal'" :class="{'input': true, 'is-danger': errors.has('potassium') }" type="number" name="potassium" v-model="potassium" min="0" max="600">
+                            <i v-show="errors.has('potassium')" class="fa fa-warning"></i>
+                            <span v-show="errors.has('potassium')" class="help is-danger">{{ errors.first('potassium') }}</span>
+                        </p>
+                        
+                        <p class="list-group-item control has-icon has-icon-right">
+                            <label class="control-label">CaO</label>
+                            <input v-validate:calcium.initial="'required|decimal'" :class="{'input': true, 'is-danger': errors.has('calcium') }" type="number" name="calcium" v-model="calcium" min="0" max="600">
+                            <i v-show="errors.has('calcium')" class="fa fa-warning"></i>
+                            <span v-show="errors.has('calcium')" class="help is-danger">{{ errors.first('calcium') }}</span>
+                        </p>
+                        
+                        
+                        <p class="list-group-item control has-icon has-icon-right">
+                            <label class="control-label">MgO</label>
+                            <input v-validate:magnesium.initial="'required|decimal'" :class="{'input': true, 'is-danger': errors.has('magnesium') }" type="number" name="magnesium" v-model="magnesium" min="0" max="600">
+                            <i v-show="errors.has('magnesium')" class="fa fa-warning"></i>
+                            <span v-show="errors.has('magnesium')" class="help is-danger">{{ errors.first('magnesium') }}</span>
+                        </p>
+                         
                 </ul>
             </template>
             <template v-else>
@@ -95,116 +217,162 @@
                    </div>
 
                        <div class = "panel-body">
-                          <ul class="list-group">
-                              <li class="list-group-item" id="id_plante" name="id_plante"><label class="label label-info">ID</label><strong>{{ id }}</strong></li>
-                            <li class="list-group-item"><label class="label label-info">Nom de la plante</label><strong>{{ nom_plante }}</strong></li>
-                            <li class="list-group-item"><label class="label label-info">Origine Géographique</label><strong>{{ origine_geographique }}</strong></li>
-                            <li class="list-group-item"><label class="label label-info">Ancienneté de culture</label><strong>{{ anciennete_culture }}</strong></li>
-                            <li class="list-group-item"><label class="label label-info">Cycle</label><strong>{{ cycle }}</strong></li>
-                            <li class="list-group-item"><label class="label label-info">Description</label><strong>{{ description }}</strong></li>
-                            <li class="list-group-item"><label class="label label-info">Groupe</label><strong>{{ listGroupes[index_groupe].nom }}</strong></li>
-                            <li class="list-group-item"><label class="label label-info">Famille</label><strong>{{ listFamilles[index_famille].nom }}</strong></li>                
-                           </ul>
+                         
+                            <p id="id_plante" name="id_plante">ID : <strong>{{ id }}</strong></p>
+                            <p><strong>Nom de la plante : </strong>{{ nom_plante }}</p>
+                            <p><strong>Origine Géographique : </strong>{{ origine_geographique }}</p>
+                            <p><strong>Ancienneté de culture : </strong>{{ anciennete_culture }}</p>
+                            <p><strong>Cycle : </strong>{{ cycle }}</p>
+                            <p><strong>Description : </strong>{{ description }}</p>
+                            <p><strong>Groupe : </strong>{{ listGroupes[index_groupe].nom }}</p>
+                            <p><strong>Famille : </strong>{{ listFamilles[index_famille].nom }}</p>                
+                        
                         </div>
-                    <div class = "panel-heading">
-                      <h3 class = "panel-title">Climat</h3>
+                </div>
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                      <h3 class="panel-title">Climat</h3>
                     </div>
-                    <div class = "panel-body">
-                    <table class="table">
-                            <tr>
-                               <th>Conditions favorables</th>
-                               <th>Conditions défavorables</th>
-                               <th>Commentaires</th>
-                           </tr>
-                            <tr>
-                                <td>{{ climat_favorable }}</td>
-                                <td>{{ climat_defavorable }}</td>
-                                <td>{{ commentaire_climat }}</td>
-                            </tr>
+                    <div class="panel-body">
+                        <table class="table table-bordered">
+                                <tr class="active">
+                                   <th class="text-center">Conditions favorables</th>
+                                   <th class="text-center">Conditions défavorables</th>
+                                   <th class="text-center">Commentaires</th>
+                               </tr>
+                                <tr>
+                                    <td>{{ climat_favorable }}</td>
+                                    <td>{{ climat_defavorable }}</td>
+                                    <td>{{ commentaire_climat }}</td>
+                                </tr>
                         </table>
-                       
+                        <p><strong>La plante ne supporte pas une température inférieur à {{ temp_gel }} degré celsius.</strong></p>
                     </div>
-                </div>                 
+                </div>
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                      <h3 class="panel-title">Sol</h3>
+                    </div>
+                    <div class="panel-body">
+                        <table class="table table-bordered">
+                                <tr class="active">
+                                   <th class="text-center">Conditions favorables</th>
+                                   <th class="text-center">Conditions défavorables</th>
+                                   <th class="text-center">Commentaires</th>
+                               </tr>
+                                <tr>
+                                    <td>{{ sol_favorable }}</td>
+                                    <td>{{ sol_defavorable }}</td>
+                                    <td>{{ commentaire_sol }}</td>
+                                </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                      <h3 class="panel-title">Fertilisation</h3>
+                    </div>
+                    <div class="panel-body">
+                        <table class="table table-bordered">
+                                <tr class="active">
+                                   <th class="text-center">Conditions favorables</th>
+                                   <th class="text-center">Conditions défavorables</th>
+                                   <th class="text-center">Commentaires</th>
+                               </tr>
+                                <tr>
+                                    <td>{{ fertilisation_favorable }}</td>
+                                    <td>{{ fertilisation_defavorable }}</td>
+                                    <td>{{ commentaire_fertilisation }}</td>
+                                </tr>
+                        </table>
+                        <p v-if="fumier_frais"><strong>La plante supporte les apports de fumier frais.</strong></p><p v-else><strong>La plante ne supporte pas les apports de fumier frais.</strong></p>
+                    </div>
+                </div>
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                      <h3 class="panel-title">Rotation (Durée, précédents conseillées)</h3>
+                    </div>
+                    <div class="panel-body">
+                        
+                        <table class="table table-bordered">
+                                <tr class="active">
+                                   <th class="text-center">Durée de rotation</th>
+                                   <th class="text-center">Commentaires</th>
+                               </tr>
+                                <tr>
+                                    <td class="text-center">{{ rotation_duree_mini }}</td>
+                                    <td>{{ commentaire_duree }}</td>
+                                </tr>
+                        </table>
+                        
+                        <table class="table table-bordered">
+                                <tr class="active">
+                                   <th class="text-center">Précédents favorables</th>
+                                   <th class="text-center">Précédents défavorables</th>
+                               </tr>
+                                <tr>
+                                    <td><p v-for="(rotation_famille_favorable, index) in rotation_familles_favorables" >{{ rotation_famille_favorable.nom }}</p><p v-for="(rotation_plante_favorable, index) in rotation_plantes_favorables" >{{ rotation_plante_favorable.nom }}</p></td>
+                                    <td><p v-for="(rotation_famille_defavorable, index) in rotation_familles_defavorables" >{{ rotation_famille_defavorable.nom }}</p><p v-for="(rotation_plante_defavorable, index) in rotation_plantes_defavorables" >{{ rotation_plante_defavorable.nom }}</p> </td>
+                                </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                      <h3 class="panel-title">Associations (Avec d'autres légumes)</h3>
+                    </div>
+                    <div class="panel-body">
+                        
+                        <table class="table table-bordered">
+                                <tr class="active">
+                                   <th class="text-center">Associations favorables</th>
+                                   <th class="text-center">Associations défavorables</th>
+                               </tr>
+                                <tr>
+                                    <td><p v-for="(plante_association_favorable, index) in plantes_associations_favorables" >{{ plante_association_favorable.nom }}</p></td>
+                                    <td><p v-for="(plante_association_defavorable, index) in plantes_associations_defavorables" >{{ plante_association_defavorable.nom }}</p></td>
+                                </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                      <h3 class="panel-title">Exportation ou mobilisation approximative en kg/ha</h3>
+                    </div>
+                    <div class="panel-body">
+                        
+                        <table class="table table-bordered">
+                                <tr class="active">
+                                    <th class="text-center">Rendement retenu/ha</th>
+                                    <th class="text-center">N</th>
+                                    <th class="text-center">P2O5</th>
+                                    <th class="text-center">K2O</th>
+                                    <th class="text-center">CaO</th>
+                                    <th class="text-center">MgO</th>
+                               </tr>
+                                <tr>
+                                    <td>{{ rendement }}</td>
+                                    <td>{{ azote }} </td>
+                                    <td>{{ phosphore }}</td>
+                                    <td>{{ potassium }}</td>
+                                    <td>{{ calcium }}</td>
+                                    <td>{{ magnesium }}</td>
+                                </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                      <h3 class="panel-title">Listes des variétés disponibles</h3>
+                    </div>
+                    <div class="panel-body">
+                        <? for (var i = 0; i < plante.get_list_variete().length; i++) { ?>
+                        <ul>
+                            <li><strong><a href="<?- urlPath ?>/<?- plante.get_list_variete()[i] ?>"><?- plante.get_list_variete()[i] ?></a></strong></li>
+                        </ul>
+                        <? } ?>
+                    </div>
+                </div>
                 
             </template>
-        
-	<table>
-   		<tr>
-		  <th></th>
-       		  <th>Conditions favorables</th>
-       		  <th>Conditions défavorables</th>
-       		  <th>Remarques</th>
-   		</tr>
-		
-		<tr>
-		<th>Sol</th>
-		<td> <?- plante.sol_favorable() ?> </td>
-		<td> <?- plante.sol_defavorable() ?> </td>
-		<td> <?- plante.commentaire_sol() ?> </td>
-		</tr>	
-		
-				
-		<tr>
-		<th>Fertilisation</th>
-		<td> <?- plante.fertilisation_favorable() ?> </td>
-		<td> <?- plante.fertilisation_defavorable() ?> </td>
-		<td> <?- plante.commentaire_fertilisation() ?> </td>
-		</tr>	
-
-        <tr>
-		<th>Rotation (Durée, précédents conseillées) </th>
-            <td><? for (var i = 0; i < plante.get_rotation_familles_favorables().length; i++) { ?>
-                <?- plante.get_rotation_familles_favorables()[i].nom ?> <? } ?> - <? for (var i = 0; i < plante.get_rotation_plantes_favorables().length; i++) { ?>
-                <?- plante.get_rotation_plantes_favorables()[i].nom ?> <? } ?> -
-                <?- plante.rotation_duree_mini() ?> ans.</td>
-            <td><? for (var i = 0; i < plante.get_rotation_familles_defavorables().length; i++) { ?>
-                <?- plante.get_rotation_familles_defavorables()[i].nom ?> <? } ?> - <? for (var i = 0; i < plante.get_rotation_plantes_defavorables().length; i++) { ?>
-                <?- plante.get_rotation_plantes_defavorables()[i].nom ?> <? } ?> </td>
-            <td> <?- plante.commentaire_duree() ?> </td>
-		</tr>
-        
-        <tr>
-        <th>Associations (Avec d'autres légumes) </th>
-            <td><? for (var i = 0; i < plante.get_plantes_associations_favorables().length; i++) { ?>
-                <?- plante.get_plantes_associations_favorables()[i].nom ?> <? } ?></td>
-            <td><? for (var i = 0; i < plante.get_plantes_associations_defavorables().length; i++) { ?>
-                <?- plante.get_plantes_associations_defavorables()[i].nom ?> <? } ?></td>
-            <td>  </td>
-		</tr>	
-
-	</table>
-    <br>
-        Exportation ou mobilisation approximative en kg/ha
-    <br>
-    <br>
-    <table>
-   		<tr>
-       	    <th>Rendement retenu/ha</th>
-       	    <th>N</th>
-       	    <th>P2O5</th>
-            <th>K2O</th>
-            <th>CaO</th>
-            <th>MgO</th>
-   		</tr>
-		<tr>
-            <td> <?- plante.rendement() ?> tonnes</td>
-            <td> <?- plante.azote() ?> </td>
-            <td> <?- plante.phosphore() ?> </td>
-            <td> <?- plante.potassium() ?> </td>
-            <td> <?- plante.calcium() ?> </td>
-            <td> <?- plante.magnesium() ?> </td>
-        </tr>
-        </table>
-    
-        
-    <div>
-    <h2>Listes des variétés disponibles :</h2>
-        
-     <? for (var i = 0; i < plante.get_list_variete().length; i++) { ?>
-            <ul>
-                <li><strong><a href="<?- urlPath ?>/<?- plante.get_list_variete()[i] ?>"><?- plante.get_list_variete()[i] ?></a></strong></li>
-            </ul>
-            <? } ?>
-    </div>
-
 </div>

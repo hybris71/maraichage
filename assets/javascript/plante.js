@@ -2,13 +2,10 @@ var urlBasePath = document.getElementsByTagName("base")[0];
 
 Vue.use(VeeValidate);
 
-/*$(document).ready(function() {
-    console.log( "ready!" );*/
-    NA.socket.emit("get-plante", {
-            id: $("li[id='id_plante'] > strong").html(),
+NA.socket.emit("get-plante", {
+            id: $("p[id='id_plante'] > strong").html(),
             urlPath: location.href
-    });
-/*});*/
+});
 
 NA.socket.on("get-plante", function (data) {
     
@@ -23,6 +20,6 @@ NA.socket.on("get-plante", function (data) {
             plante.$mount(".main");
             NA.socket.on("update-plante", function (data) {
                 console.log("socket on update");
-                plante.data = data.data;         
+                plante.data = data.data;     
             });     
 });

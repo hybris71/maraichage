@@ -78,9 +78,32 @@ exports.setSockets = function () {
                                                 index_groupe: groupes.findIndex(function (item) { return plante.id_groupe() === item.id; }),
                                                 listFamilles: familles,
                                                 index_famille: familles.findIndex(function (item) { return plante.id_famille() === item.id; }),
-                                                climat_favorable: locals.plante.climat_favorable(),
-                                                climat_defavorable: locals.plante.climat_defavorable(),
-                                                commentaire_climat: locals.plante.commentaire_climat()
+                                                temp_gel: plante.temp_gel(),
+                                                fumier_frais: plante.fumier_frais(),
+                                                climat_favorable: plante.climat_favorable(),
+                                                climat_defavorable: plante.climat_defavorable(),
+                                                commentaire_climat: plante.commentaire_climat(),
+                                                sol_favorable: plante.sol_favorable(),
+                                                sol_defavorable: plante.sol_defavorable(),
+                                                commentaire_sol: plante.commentaire_sol(),
+                                                fertilisation_favorable: plante.fertilisation_favorable(),
+                                                fertilisation_defavorable: plante.fertilisation_defavorable(),
+                                                commentaire_fertilisation: plante.commentaire_fertilisation(),
+                                                rotation_familles_favorables: plante.get_rotation_familles_favorables(),
+                                                rotation_familles_defavorables: plante.get_rotation_familles_defavorables(),
+                                                rotation_plantes_favorables: plante.get_rotation_plantes_favorables(),
+                                                rotation_plantes_defavorables: plante.get_rotation_plantes_defavorables(),
+                                                plantes_associations_favorables: plante.get_plantes_associations_favorables(),
+                                                plantes_associations_defavorables: plante.get_plantes_associations_defavorables(),
+                                                rotation_duree_mini: plante.rotation_duree_mini(),
+                                                commentaire_duree: plante.commentaire_duree(),
+                                                rendement: plante.rendement(),
+                                                azote: plante.azote(),
+                                                phosphore: plante.phosphore(),
+                                                potassium: plante.potassium(),
+                                                calcium: plante.calcium(),
+                                                magnesium: plante.magnesium(),
+                                                varietes: plante.get_list_variete()
                                             }
                                         });
 
@@ -123,50 +146,102 @@ exports.setSockets = function () {
                                     .id_famille(data.listFamilles[data.index_famille].id)
                                     .udpate_plante(function (infos){
                                     
-                                        console.log(".update_plante");
-                                    
-                                        console.log(plante.id_plante());
+                                        
+                                        plante
+                                        .climat_favorable(data.climat_favorable)
+                                        .climat_defavorable(data.climat_defavorable)
+                                        .commentaire_climat(data.commentaire_climat)
+                                        .temp_gel(data.temp_gel)
+                                        .sol_favorable(data.sol_favorable)
+                                        .sol_defavorable(data.sol_defavorable)
+                                        .commentaire_sol(data.commentaire_sol)
+                                        .fertilisation_favorable(data.fertilisation_favorable)
+                                        .fertilisation_defavorable(data.fertilisation_defavorable)
+                                        .commentaire_fertilisation(data.commentaire_fertilisation)
+                                        .fumier_frais(data.fumier_frais)
+                                        .udpate_pedoclimat(function (infos) {
                                             
-                                        // On récupère les variations spécifiques
-                                        locals = NA.specific("plante.json", undefined);
-                                        // On récupère les variations
-                                        // variations = NA.common(data.lang, variations);
-                                        locals.plante = plante;
-                                        // On récupère le fragment HTML depuis le dossier `viewsRelativePath` et on applique les variations.
-                                        locals.urlPath = data.urlPath;
-                                        render = NA.view("plante.htm", locals);
-                                        //console.log(render);
-                                        //console.log("plante groupe:" + plante.nom_groupe());
-                                        //console.log("plante famille:" + plante.nom_famille());
-                                        io.sockets.emit("update-plante", {
-                                            view: render,                            
-                                            data: {
-                                                edit: false,
-                                                styleObjectEdit: {
-                                                    display: 'block'
-                                                },
-                                                styleObjectOk: {
-                                                    display: 'none'
-                                                },
-                                                id: plante.id_plante(),
-                                                nom_plante: plante.nom_plante(),
-                                                origine_geographique:plante.origine_geographique(),
-                                                anciennete_culture:plante.anciennete_culture(),
-                                                cycle:plante.cycle(),
-                                                description:plante.description(),
-                                                nom_groupe:plante.nom_groupe(),
-                                                id_groupe:plante.id_groupe(),
-                                                nom_famille:plante.nom_famille(),
-                                                id_famille:plante.id_famille(),
-                                                listGroupes: groupes,
-                                                index_groupe: groupes.findIndex(function (item) { return plante.id_groupe() === item.id; }),
-                                                listFamilles: familles,
-                                                index_famille: familles.findIndex(function (item) { return plante.id_famille() === item.id; }),
-                                                climat_favorable: locals.plante.climat_favorable(),
-                                                climat_defavorable: locals.plante.climat_defavorable(),
-                                                commentaire_climat: locals.plante.commentaire_climat()
-                                            }
-                                        });
+                                            plante
+                                                .rotation_duree_mini(data.rotation_duree_mini)
+                                                .commentaire_duree(data.commentaire_duree)
+                                                .update_rotation_duree(function (infos) {
+                                                
+                                                    plante
+                                                        .rendement(data.rendement)
+                                                        .azote(data.azote)
+                                                        .phosphore(data.phosphore)
+                                                        .potassium(data.potassium)
+                                                        .calcium(data.calcium)
+                                                        .magnesium(data.magnesium)
+                                                        .update_exportations(function (infos) {
+                                                        
+                                                            // On récupère les variations spécifiques
+                                                            locals = NA.specific("plante.json", undefined);
+                                                            // On récupère les variations
+                                                            // variations = NA.common(data.lang, variations);
+                                                            locals.plante = plante;
+                                                            // On récupère le fragment HTML depuis le dossier `viewsRelativePath` et on applique les variations.
+                                                            locals.urlPath = data.urlPath;
+                                                            render = NA.view("plante.htm", locals);
+                                                            //console.log(render);
+                                                            //console.log("plante groupe:" + plante.nom_groupe());
+                                                            //console.log("plante famille:" + plante.nom_famille());
+                                                            io.sockets.emit("update-plante", {
+                                                                view: render,                            
+                                                                data: {
+                                                                    edit: false,
+                                                                    styleObjectEdit: {
+                                                                        display: 'block'
+                                                                    },
+                                                                    styleObjectOk: {
+                                                                        display: 'none'
+                                                                    },
+                                                                    id: plante.id_plante(),
+                                                                    nom_plante: plante.nom_plante(),
+                                                                    origine_geographique:plante.origine_geographique(),
+                                                                    anciennete_culture:plante.anciennete_culture(),
+                                                                    cycle:plante.cycle(),
+                                                                    description:plante.description(),
+                                                                    nom_groupe:plante.nom_groupe(),
+                                                                    id_groupe:plante.id_groupe(),
+                                                                    nom_famille:plante.nom_famille(),
+                                                                    id_famille:plante.id_famille(),
+                                                                    listGroupes: groupes,
+                                                                    index_groupe: groupes.findIndex(function (item) { return plante.id_groupe() === item.id; }),
+                                                                    listFamilles: familles,
+                                                                    index_famille: familles.findIndex(function (item) { return plante.id_famille() === item.id; }),
+                                                                    temp_gel: plante.temp_gel(),
+                                                                    fumier_frais: plante.fumier_frais(),
+                                                                    climat_favorable: plante.climat_favorable(),
+                                                                    climat_defavorable: plante.climat_defavorable(),
+                                                                    commentaire_climat: plante.commentaire_climat(),
+                                                                    sol_favorable: plante.sol_favorable(),
+                                                                    sol_defavorable: plante.sol_defavorable(),
+                                                                    commentaire_sol: plante.commentaire_sol(),
+                                                                    fertilisation_favorable: plante.fertilisation_favorable(),
+                                                                    fertilisation_defavorable: plante.fertilisation_defavorable(),
+                                                                    commentaire_fertilisation: plante.commentaire_fertilisation(),
+                                                                    rotation_familles_favorables: plante.get_rotation_familles_favorables(),
+                                                                    rotation_familles_defavorables: plante.get_rotation_familles_defavorables(),
+                                                                    rotation_plantes_favorables: plante.get_rotation_plantes_favorables(),
+                                                                    rotation_plantes_defavorables: plante.get_rotation_plantes_defavorables(),
+                                                                    plantes_associations_favorables: plante.get_plantes_associations_favorables(),
+                                                                    plantes_associations_defavorables: plante.get_plantes_associations_defavorables(),
+                                                                    rotation_duree_mini: plante.rotation_duree_mini(),
+                                                                    commentaire_duree: plante.commentaire_duree(),
+                                                                    rendement: plante.rendement(),
+                                                                    azote: plante.azote(),
+                                                                    phosphore: plante.phosphore(),
+                                                                    potassium: plante.potassium(),
+                                                                    calcium: plante.calcium(),
+                                                                    magnesium: plante.magnesium(),
+                                                                    varietes: plante.get_list_variete()
+
+                                                                }
+                                                            });
+                                                    }); 
+                                            });    
+                                        }); 
                                     });
                             }); 
                     });
@@ -204,9 +279,33 @@ exports.changeDom = function (next, locals) {
             index_groupe: locals.groupes.findIndex(function (item) { return locals.plante.id_groupe() === item.id; }),
             listFamilles: locals.familles,
             index_famille: locals.familles.findIndex(function (item) { return locals.plante.id_famille() === item.id; }),
+            temp_gel: locals.plante.temp_gel(),
+            fumier_frais: locals.plante.fumier_frais(),
             climat_favorable: locals.plante.climat_favorable(),
             climat_defavorable: locals.plante.climat_defavorable(),
-            commentaire_climat: locals.plante.commentaire_climat()
+            commentaire_climat: locals.plante.commentaire_climat(),
+            sol_favorable: locals.plante.sol_favorable(),
+            sol_defavorable: locals.plante.sol_defavorable(),
+            commentaire_sol: locals.plante.commentaire_sol(),
+            fertilisation_favorable: locals.plante.fertilisation_favorable(),
+            fertilisation_defavorable: locals.plante.fertilisation_defavorable(),
+            commentaire_fertilisation: locals.plante.commentaire_fertilisation(),
+            rotation_familles_favorables: locals.plante.get_rotation_familles_favorables(),
+            rotation_familles_defavorables: locals.plante.get_rotation_familles_defavorables(),
+            rotation_plantes_favorables: locals.plante.get_rotation_plantes_favorables(),
+            rotation_plantes_defavorables: locals.plante.get_rotation_plantes_defavorables(),
+            plantes_associations_favorables: locals.plante.get_plantes_associations_favorables(),
+            plantes_associations_defavorables: locals.plante.get_plantes_associations_defavorables(),
+            rotation_duree_mini: locals.plante.rotation_duree_mini(),
+            commentaire_duree: locals.plante.commentaire_duree(),
+            rendement: locals.plante.rendement(),
+            azote: locals.plante.azote(),
+            phosphore: locals.plante.phosphore(),
+            potassium: locals.plante.potassium(),
+            calcium: locals.plante.calcium(),
+            magnesium: locals.plante.magnesium(),
+            varietes: locals.plante.get_list_variete()
+            
         };
     
     fs.readFile(view, "utf-8", function (error, content) {
