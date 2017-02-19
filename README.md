@@ -90,40 +90,35 @@ Créer un fichier `webconfig.json` à la racine du projet
 	    "controller": "index.js",
 	    "view": "index.htm"
         },
-    "/rotation/": {
-			"variation": "rotation.json",
-			"controller": "rotation.js",
-			"view": "rotation.htm"
+    	"/rotation/": {
+		"variation": "rotation.json",
+		"controller": "rotation.js",
+		"view": "rotation.htm"
 	},
-    "/association/": {
-			"variation": "association.json",
-			"controller": "association.js",
-			"view": "association.htm"
+    	"/association/": {
+		"variation": "association.json",
+		"controller": "association.js",
+		"view": "association.htm"
 	},
 	"/catalogue/": {
-			"variation": "catalogue.json",
-			"controller": "catalogue.js",
-			"view": "catalogue.htm"
+		"variation": "catalogue.json",
+		"controller": "catalogue.js",
+		"view": "catalogue.htm"
 	},
-    "/catalogue/add": {
-			"variation": "addplante.json",
-			"controller": "addplante.js",
-			"view": "addplante.htm"
+	"/catalogue/add": {
+		"variation": "addplante.json",
+		"controller": "addplante.js",
+		"view": "addplante.htm"
 	},
 	"/catalogue/:plante": {
 		"variation": "plante.json",
-        "controller": "plante.js",
-        "view": "plante.htm"
-	},
-    "/catalogue/:plante/edit": {
-		"variation": "plante-edit.json",
-        "controller": "plante.js",
-        "view": "plante.htm"
+        	"controller": "plante.js",
+        	"view": "plante.htm"
 	},
 	"/catalogue/:plante/:variete": {
 		"variation": "variete.json",
-        "controller": "variete.js",
-        "view": "variete.htm"
+        	"controller": "variete.js",
+        	"view": "variete.htm"
 	}
     },
     "_mysqlConfig": {
