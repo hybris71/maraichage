@@ -1,5 +1,3 @@
-Vue.use(VeeValidate);
-
 NA.socket.emit("get-form");
 
 NA.socket.on("get-form", function (data) {
