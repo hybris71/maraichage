@@ -291,10 +291,4 @@ exports.changeVariations = function (next, locals) {
                     });
             });
     });
-
-    if (locals.body.nom) {
-    
-        
-        
-    }
 };

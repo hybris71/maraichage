@@ -1,7 +1,44 @@
-    <div class="main">
+    <div class="main container">
         <h1><?- specific.titlePage ?></h1>
         <?- specific.content ?>
 
+        
+        <p><button class="btn btn-warning" v-on:click="changeEdit" v-bind:style="styleObjectEdit">Modifier</button><button class="btn btn-danger" id="save" v-on:click="validateBeforeSave" v-bind:style="styleObjectOk">Sauvegarder</button></p>
+        
+        <template v-if="edit === true">
+            <ul class="list-group">
+                <li class="list-group-item active">Généralités</li>
+                <li class="list-group-item" id="id_variete" name="id_variete">ID: <strong>{{ id_variete }}</strong></li>
+                
+                <p class="list-group-item control has-icon has-icon-right"> 
+                    <label class="control-label">Nom de la variété</label>
+                        <input name="nom_variete" v-model="nom_variete" v-validate:nom_variete.initial="'required|min:3|max:50'" :class="{'input': true, 'is-danger': errors.has('nom_variete') }" type="text">
+                        <i v-show="errors.has('nom_variete')" class="fa fa-warning"></i>
+                        <span v-show="errors.has('nom_variete')" class="alert alert-danger">{{ errors.first('nom_variete') }}</span>
+                </p>
+                
+                <p class="list-group-item control has-icon has-icon-right"> 
+                    <label class="control-label">Description</label>
+                        <input name="description" v-model="description" v-validate:description.initial="'required|min:3|max:200'" :class="{'input': true, 'is-danger': errors.has('description') }" type="text">
+                        <i v-show="errors.has('description')" class="fa fa-warning"></i>
+                        <span v-show="errors.has('description')" class="alert alert-danger">{{ errors.first('description') }}</span>
+                </p>
+            </ul>
+        </template>
+            <template v-else>
+                <div class = "panel panel-primary">
+                    <div class = "panel-heading">
+                        <h3 class = "panel-title">Généralités</h3>
+                    </div>
+                    <div class = "panel-body">
+                        <p id="id_variete" name="id_variete">ID : <strong>{{ id_variete }}</strong></p>
+                        <p><strong>Nom de la variété : </strong>{{ nom_variete }}</p>
+                        <p><strong>Description : </strong>{{ description }}</p>
+                    </div>
+                </div>
+                
+            </template>
+        
 	#<?- variete.id_variete() ?> Variété <?- variete.nom_variete() ?> 
         
             <fieldset><legend>Description</legend>

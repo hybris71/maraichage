@@ -64,6 +64,7 @@ function Variete(connection) {
                 addWhere = " WHERE ";
 
 	if (publics.nom_variete()) { where += addWhere + "`nom_variete` = '" + publics.nom_variete().replace(/'/g, "''") + "'"; addWhere = ' && '; }
+    if (publics.id_variete()) { where += addWhere + "`id_variete` = '" + publics.id_variete().replace(/'/g, "''") + "'"; addWhere = ' && '; }
 
 	privates.connection.query(select + where, function(err, rows, fields) {
 

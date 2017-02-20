@@ -1,0 +1,23 @@
+    <div class="main container">
+        <h1><?- specific.titlePage ?></h1>
+
+        <form @submit.prevent="validateBeforeSubmit" v-if="!formSubmitted">
+            
+            <fieldset><legend>Généralités</legend>
+            <p class="control has-icon has-icon-right"> 
+                <label class="control-label">Nom de la variété</label>
+                <input name="name" v-model="name" v-validate:name.initial="'required|min:3|max:50'" :class="{'input': true, 'is-danger': errors.has('name') }" type="text" placeholder="Nom Commun">
+                <i v-show="errors.has('name')" class="fa fa-warning"></i>
+                <span v-show="errors.has('name')" class="alert alert-danger">{{ errors.first('name') }}</span> 
+            </p>
+            
+                
+            </fieldset>
+            <br>
+            <button class="btn btn-primary btn-block" type="submit">Ajout de la plante</button>
+        </form>
+        <div v-else>
+        <span class="alert alert-success">Plante ajouté avec succès !</span>
+        <button class="btn btn-primary btn-block" v-on:click="addNewPlante">Ajouter une nouvelle plante</button>
+        </div>		
+    </div>
