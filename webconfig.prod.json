@@ -1,0 +1,13 @@
+{
+    "httpHostname": "127.0.0.1",
+    "httpPort": 7000,
+    "urlPort": 80,
+    "cache": true,
+    "urlHostname": "domain.com",
+    "variation": "common.json",
+    "controller": "common.js",
+    "view": "layout.htm",
+    "statics": "statics.json",
+    "routes": "routes.json",
+    "_mysqlConfig": "mysql-config.json"
+}
