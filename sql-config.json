@@ -1,7 +1,0 @@
-{
-    "connectionLimit":"1000",
-    "host": "localhost",
-    "user": "root",
-    "password": "root",
-    "database": "maraichage"
-}
