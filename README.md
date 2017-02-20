@@ -76,7 +76,7 @@ mysql --user=<USERNAME> --host=<HOSTNAME> --password=<PASSWORD> <DBNAME> < marai
 
 **Configurer l'application**
 
-Créer un fichier `sql-config.json` à la racine du projet :
+Créer un fichier `mysql-config.json` à la racine du projet :
 
 ```js
 {
@@ -88,7 +88,7 @@ Créer un fichier `sql-config.json` à la racine du projet :
 }
 ```
 
-Et autant de `sql-config.json` sur chaque environnement qu'il y a de base de données aux accès différents.
+Et autant de `mysql-config.json` sur chaque environnement qu'il y a de base de données aux accès différents.
 
 **Lancer l'application**
 

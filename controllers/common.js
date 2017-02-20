@@ -21,7 +21,7 @@ exports.setConfigurations = function (next) {
     mysql = NA.modules.mysql;
 
     try {
-        NA.webconfig._sqlConfig = require("../" + NA.webconfig._sqlConfig);
+        NA.webconfig._mysqlConfig = require("../" + NA.webconfig._mysqlConfig);
     } catch (e) {
         if (e.code === "MODULE_NOT_FOUND") {
             console.log("\033[41mCréer un fichier `sql-config.json` à la racine avec le contenu proposé dans le `README.md` pour faire fonctionner cette application.\033[0m");
@@ -30,7 +30,7 @@ exports.setConfigurations = function (next) {
     }
 
 	
-    NA.mySql = mysql.createPool(NA.webconfig._sqlConfig);
+    NA.mySql = mysql.createPool(NA.webconfig._mysqlConfig);
     
     next();
 };
