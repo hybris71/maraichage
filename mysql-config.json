@@ -1,0 +1,7 @@
+{
+    "connectionLimit":"1000",
+    "host": "localhost",
+    "user": "root",
+    "password": "yourpassword",
+    "database": "database_name"
+}
