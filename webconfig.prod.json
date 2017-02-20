@@ -9,5 +9,5 @@
     "view": "layout.htm",
     "statics": "statics.json",
     "routes": "routes.json",
-    "_mysqlConfig": "mysql-config.json"
+    "_sqlConfig": "sql-config.json"
 }

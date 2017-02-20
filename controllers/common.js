@@ -19,10 +19,10 @@ exports.setConfigurations = function (next) {
     var NA = this,
 	path = NA.modules.path,
     mysql = NA.modules.mysql;
-    NA.webconfig._mysqlConfig = require("../" + NA.webconfig._mysqlConfig);
+    NA.webconfig._sqlConfig = require("../" + NA.webconfig._sqlConfig);
 
 	
-    NA.mySql = mysql.createPool(NA.webconfig._mysqlConfig);
+    NA.mySql = mysql.createPool(NA.webconfig._sqlConfig);
     
     next();
 };

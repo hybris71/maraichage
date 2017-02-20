@@ -8,10 +8,10 @@ La gestion du temps est la plus grande préoccupation du maraîcher ! L'idée g�
 ## Développement ##
 
 Technologies :
-- Nodejs : [Site Officiel](https://nodejs.org)
-- Module NodeAtlas : [Site complet et détaillé](https://node-atlas.js.org/NodeAtlas/)
-- Vue.js : [Site Officiel](https://vuejs.org/)
-- Une base de données [MariaDB](https://mariadb.org/)
+- Exécutable Node.js : [Site Officiel](https://nodejs.org/)
+- Module NPM NodeAtlas : [Site Officiel](https://node-atlas.js.org/)
+- Librairie JS Vue : [Site Officiel](https://fr.vuejs.org/)
+- Base de données SQL MariaDB [Site Officiel](https://mariadb.org/)
 
 Actuellement nous avons : 
 - La liste des plantes
@@ -42,7 +42,7 @@ Développement futur :
 
 **Récupérer la dernière version du projet** 
 
-``` 
+```bash
 git clone https://github.com/hybris71/maraichage.git
 ``` 
 
@@ -50,7 +50,7 @@ git clone https://github.com/hybris71/maraichage.git
 
 Entrer dans le répertoire du projet et taper :
 
-```
+```bash
 npm install
 ```
 
@@ -58,86 +58,28 @@ npm install
 
 **Importer la base**
 
-```
+```bash
 mysql -h localhost -u user -ppassword database_name < maraichage.sql
 ```
 
 **Configurer l'application**
 
-Créer un fichier `webconfig.json` à la racine du projet
+Créer un fichier `sql-config.json` à la racine du projet :
 
 ```js
 {
-    "httpHostname": "127.0.0.1",
-    "httpPort": 7000,
-    "httpHostname": "domain.com",
-    "staticOptions": {
-        "maxAge": 0
-    },
-    "assetsRelativePath": "assets",
-    "variation": "common.json",
-    "variationsRelativePath": "variations",
-    "controllersRelativePath": "controllers",
-    "controller": "common.js",
-    "view": "layout.htm",
-    "statics": {
-        "/view-model": "views",
-        "/models": "models/objects"
-    },
-    "routes": {
-        "/": {
-	    "variation": "index.json",
-	    "controller": "index.js",
-	    "view": "index.htm"
-        },
-    	"/rotation/": {
-		"variation": "rotation.json",
-		"controller": "rotation.js",
-		"view": "rotation.htm"
-	},
-    	"/association/": {
-		"variation": "association.json",
-		"controller": "association.js",
-		"view": "association.htm"
-	},
-	"/catalogue/": {
-		"variation": "catalogue.json",
-		"controller": "catalogue.js",
-		"view": "catalogue.htm"
-	},
-	"/catalogue/add": {
-		"variation": "addplante.json",
-		"controller": "addplante.js",
-		"view": "addplante.htm"
-	},
-	"/catalogue/:plante": {
-		"variation": "plante.json",
-        	"controller": "plante.js",
-        	"view": "plante.htm"
-	},
-	"/catalogue/:plante/:variete": {
-		"variation": "variete.json",
-        	"controller": "variete.js",
-        	"view": "variete.htm"
-	}
-    },
-    "_mysqlConfig": {
-	"connectionLimit":"1000",
-        "host": "localhost",
-        "user": "root",
-        "password": "yourpassword",
-        "database": "database_name"
-    }
+    "connectionLimit":"1000",
+    "host": "localhost",
+    "user": "root",
+    "password": "yourpassword",
+    "database": "database_name"
 }
-``` 
+```
+
+Et autant de `sql-config.json` sur chaque environnement qu'il y a de base de données aux accès différents.
 
 **Lancer l'application**
 
-```
+```bash
 node server.js
 ```
-
-
-
-
-
