@@ -1,5 +1,3 @@
-Vue.use(VeeValidate);
-
 NA.socket.emit("get-variete", {
             id_variete: $("p[id='id_variete'] > strong").html(),
             urlPath: location.href

@@ -1,7 +1,5 @@
 var urlBasePath = document.getElementsByTagName("base")[0];
 
-Vue.use(VeeValidate);
-
 NA.socket.emit("get-plante", {
             id: $("p[id='id_plante'] > strong").html(),
             urlPath: location.href
