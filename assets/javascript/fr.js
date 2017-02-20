@@ -11,6 +11,9 @@ var VeeFr = {
     max: function (field, length) {
         return field + " ne peut pas contenir plus de " + length[0] + " caractères.";
     },
+    min: function (field, length) {
+        return field + " doit contenir au minimum " + length[0] + " caractères.";
+    },
     required: function (field) {
         return field + " est obligatoire.";
     }
