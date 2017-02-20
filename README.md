@@ -42,13 +42,15 @@ Développement futur :
 
 **Récupérer la dernière version du projet** 
 
+Depuis une console.
+
 ```bash
 git clone https://github.com/hybris71/maraichage.git
 ``` 
 
 **Installer les modules**
 
-Entrer dans le répertoire du projet et taper :
+Entrer dans le répertoire du projet et taper depuis une console :
 
 ```bash
 npm install
@@ -56,10 +58,20 @@ npm install
 
 **Installer MySQL**
 
-**Importer la base**
+**Créer la base**
+
+Depuis mysql.
 
 ```bash
-mysql -h localhost -u user -ppassword database_name < maraichage.sql
+mysql> CREATE DATABASE <DBNAME>
+```
+
+**Importer les tables**
+
+Depuis une console.
+
+```bash
+mysql --user=<USERNAME> --host=<HOSTNAME> --password=<PASSWORD> <DBNAME> < maraichage.sql
 ```
 
 **Configurer l'application**
@@ -69,10 +81,10 @@ Créer un fichier `sql-config.json` à la racine du projet :
 ```js
 {
     "connectionLimit":"1000",
-    "host": "localhost",
-    "user": "root",
-    "password": "yourpassword",
-    "database": "database_name"
+    "host": "<HOSTNAME>",
+    "user": "<USERNAME>",
+    "password": "<PASSWORD>",
+    "database": "<DBNAME>"
 }
 ```
 
@@ -80,6 +92,8 @@ Et autant de `sql-config.json` sur chaque environnement qu'il y a de base de don
 
 **Lancer l'application**
 
+Depuis une console.
+
 ```bash
-node server.js
+node server.js --browse
 ```
