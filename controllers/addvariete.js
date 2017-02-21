@@ -57,7 +57,7 @@ exports.setSockets = function () {
                        
             var variete = new Variete();
             
-            NA.mySql.getConnection(function(err, connection) {
+/*            NA.mySql.getConnection(function(err, connection) {
                 if (err) {
                     throw err;
                 }
@@ -92,7 +92,7 @@ exports.setSockets = function () {
                                         
                 });
                
-            });
+            });*/
         
         });
     });
