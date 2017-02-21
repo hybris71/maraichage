@@ -1,0 +1,12 @@
+body {
+  font-family: Helvetica, sans-serif;
+}
+.container {
+  width: 500px;
+}
+img {
+  text-align: center
+}
+.submitted {
+  color: #4fc08d;
+}
