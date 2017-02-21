@@ -1,6 +1,7 @@
 exports.setSockets = function () {
     var NA = this,
         io = NA.io,
+        Plante = NA.models.Plante,
         Variete = NA.models.Variete,
         locals = {};
 
@@ -9,25 +10,47 @@ exports.setSockets = function () {
         
         var render;
         
-        socket.on("get-form-variete", function () {
+        socket.on("get-form-variete", function (data) {
             
-            // On récupère les variations spécifiques
-            locals = NA.specific("addvariete.json", undefined);
-            // On récupère les variations
-            // variations = NA.common(data.lang, variations);
-            //locals.plante = plante;
-            //console.log(locals);
-            // On récupère le fragment HTML depuis le dossier `viewsRelativePath` et on applique les variations.
-            //locals.urlPath = data.urlPath;
+            var plante = new Plante();
             
-            render = NA.view("addvariete.htm", locals);
-            //console.log(render);
+            NA.mySql.getConnection(function (err, connection) {
+                if (err) {
+                    console.log(err);
+                    return false;
+                }
             
-            io.sockets.emit("get-form-variete", {
-                view: render,                            
-                data: { }
+                plante
+                    .setConnection(connection)
+                    .id_plante(data.id_plante)
+                    .readAll(function () {
+
+                    // On récupère les variations spécifiques
+                    locals = NA.specific("addvariete.json", undefined);
+                    // On récupère les variations
+                    // variations = NA.common(data.lang, variations);
+                    //locals.plante = plante;
+                    //console.log(locals);
+                    // On récupère le fragment HTML depuis le dossier `viewsRelativePath` et on applique les variations.
+                    //locals.urlPath = data.urlPath;
+
+                    render = NA.view("addvariete.htm", locals);
+                    //console.log(render);
+
+                    io.sockets.emit("get-form-variete", {
+                        view: render,                            
+                        data: {
+                            nom_plante: plante.nom_plante(),
+                            id_plante: plante.id_plante(),
+                            nom_variete: '',
+                            description: '',
+                            duree_vie: '1',
+                            pmg: '1',
+                            formSubmitted: false
+                        }
+                    });
+                });
             });
-                
         });
         
         socket.on("add-variete", function (data) {
@@ -56,7 +79,15 @@ exports.setSockets = function () {
                 
                     io.sockets.emit("add-variete", {
                         view: render,                            
-                        data: { }
+                        data: {
+                            nom_plante: plante.nom_plante(),
+                            id_plante: plante.id_plante(),
+                            nom_variete: '',
+                            description: '',
+                            duree_vie: '1',
+                            pmg: '1',
+                            formSubmitted: true
+                        }
                     }); 
                                         
                 });
@@ -74,7 +105,15 @@ exports.changeDom = function (next, locals) {
         path = NA.modules.path,
         view = path.join(NA.serverPath, NA.webconfig.viewsRelativePath, "addvariete.htm"),
         model = path.join(NA.serverPath, NA.webconfig.viewsRelativePath, "addvariete.js"),
-        data = {};
+        data = {
+            nom_plante: locals.plante.nom_plante(),
+            id_plante: locals.plante.id_plante(),
+            nom_variete: '',
+            description: '',
+            duree_vie: '1',
+            pmg: '1',
+            formSubmitted: false
+        };
     
     fs.readFile(view, "utf-8", function (error, content) {
         
@@ -92,6 +131,22 @@ exports.changeDom = function (next, locals) {
 };
 
 exports.changeVariations = function (next, locals) {
-    var NA = this;
-    next();
+    var NA = this,
+        Plante = NA.models.Plante,
+        plante = new Plante();
+    
+    NA.mySql.getConnection(function(err, connection) {
+        if (err) {
+            throw err;
+        }
+            
+        plante
+            .setConnection(connection)
+            .nom_plante(locals.params.plante)
+            .readAll(function () {
+
+                locals.plante = plante;
+                next();
+            });
+    });
 };

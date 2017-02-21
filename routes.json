@@ -29,6 +29,11 @@
         "controller": "plante.js",
         "view": "plante.htm"
     },
+     "/catalogue/:plante/add": {
+        "variation": "addvariete.json",
+        "controller": "addvariete.js",
+        "view": "addvariete.htm"
+    },
     "/catalogue/:plante/:variete": {
         "variation": "variete.json",
         "controller": "variete.js",

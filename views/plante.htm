@@ -261,6 +261,7 @@
                     </div>
                     <div class="panel-body">
                         <table class="table table-bordered">
+                            <tbody>
                                 <tr class="active">
                                    <th class="text-center">Conditions favorables</th>
                                    <th class="text-center">Conditions défavorables</th>
@@ -271,6 +272,7 @@
                                     <td>{{ sol_defavorable }}</td>
                                     <td>{{ commentaire_sol }}</td>
                                 </tr>
+                            </tbody>
                         </table>
                     </div>
                 </div>
@@ -280,6 +282,7 @@
                     </div>
                     <div class="panel-body">
                         <table class="table table-bordered">
+                            <tbody>
                                 <tr class="active">
                                    <th class="text-center">Conditions favorables</th>
                                    <th class="text-center">Conditions défavorables</th>
@@ -290,6 +293,7 @@
                                     <td>{{ fertilisation_defavorable }}</td>
                                     <td>{{ commentaire_fertilisation }}</td>
                                 </tr>
+                            </tbody>
                         </table>
                         <p v-if="fumier_frais"><strong>La plante supporte les apports de fumier frais.</strong></p><p v-else><strong>La plante ne supporte pas les apports de fumier frais.</strong></p>
                     </div>
@@ -301,6 +305,7 @@
                     <div class="panel-body">
                         
                         <table class="table table-bordered">
+                            <tbody>
                                 <tr class="active">
                                    <th class="text-center">Durée de rotation</th>
                                    <th class="text-center">Commentaires</th>
@@ -309,9 +314,11 @@
                                     <td class="text-center">{{ rotation_duree_mini }}</td>
                                     <td>{{ commentaire_duree }}</td>
                                 </tr>
+                            </tbody>
                         </table>
                         
                         <table class="table table-bordered">
+                            <tbody>
                                 <tr class="active">
                                    <th class="text-center">Précédents favorables</th>
                                    <th class="text-center">Précédents défavorables</th>
@@ -320,6 +327,7 @@
                                     <td><p v-for="(rotation_famille_favorable, index) in rotation_familles_favorables" >{{ rotation_famille_favorable.nom }}</p><p v-for="(rotation_plante_favorable, index) in rotation_plantes_favorables" >{{ rotation_plante_favorable.nom }}</p></td>
                                     <td><p v-for="(rotation_famille_defavorable, index) in rotation_familles_defavorables" >{{ rotation_famille_defavorable.nom }}</p><p v-for="(rotation_plante_defavorable, index) in rotation_plantes_defavorables" >{{ rotation_plante_defavorable.nom }}</p> </td>
                                 </tr>
+                            </tbody>
                         </table>
                     </div>
                 </div>
@@ -330,6 +338,7 @@
                     <div class="panel-body">
                         
                         <table class="table table-bordered">
+                            <tbody>
                                 <tr class="active">
                                    <th class="text-center">Associations favorables</th>
                                    <th class="text-center">Associations défavorables</th>
@@ -338,6 +347,7 @@
                                     <td><p v-for="(plante_association_favorable, index) in plantes_associations_favorables" >{{ plante_association_favorable.nom }}</p></td>
                                     <td><p v-for="(plante_association_defavorable, index) in plantes_associations_defavorables" >{{ plante_association_defavorable.nom }}</p></td>
                                 </tr>
+                            </tbody>
                         </table>
                     </div>
                 </div>
@@ -348,6 +358,7 @@
                     <div class="panel-body">
                         
                         <table class="table table-bordered">
+                            <tbody>
                                 <tr class="active">
                                     <th class="text-center">Rendement retenu/ha</th>
                                     <th class="text-center">N</th>
@@ -364,6 +375,7 @@
                                     <td>{{ calcium }}</td>
                                     <td>{{ magnesium }}</td>
                                 </tr>
+                            </tbody>
                         </table>
                     </div>
                 </div>
@@ -372,11 +384,13 @@
                       <h3 class="panel-title">Listes des variétés disponibles</h3>
                     </div>
                     <div class="panel-body">
-                        <? for (var i = 0; i < plante.get_list_variete().length; i++) { ?>
                         <ul>
+                        <? for (var i = 0; i < plante.get_list_variete().length; i++) { ?>
                             <li><strong><a href="<?- urlPath ?>/<?- plante.get_list_variete()[i] ?>"><?- plante.get_list_variete()[i] ?></a></strong></li>
-                        </ul>
+                        
                         <? } ?>
+                        </ul>
+                        <strong><a href="<?- urlPath ?>/add">Ajouter une nouvelle variété</a></strong>
                     </div>
                 </div>
                 

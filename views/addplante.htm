@@ -6,7 +6,7 @@
             <fieldset><legend>Généralités</legend>
             <p class="control has-icon has-icon-right"> 
                 <label class="control-label">Nom de la plante</label>
-                <input name="name" v-model="name" v-validate:name.initial="'required|min:3|max:50'" :class="{'input': true, 'is-danger': errors.has('name') }" type="text" placeholder="Nom Commun">
+                <input name="name" data-vv-as="Le nom de la plante" v-model="name" v-validate:name.initial="'required|min:3|max:50'" :class="{'input': true, 'is-danger': errors.has('name') }" type="text" placeholder="Nom Commun">
                 <i v-show="errors.has('name')" class="fa fa-warning"></i>
                 <span v-show="errors.has('name')" class="alert alert-danger">{{ errors.first('name') }}</span> 
             </p>
@@ -31,36 +31,36 @@
             
             <p class="control has-icon has-icon-right"> 
                 <label class="control-label">Description de la plante</label><br>
-                <textarea rows="10" cols="80" name="description" v-model="description" v-validate:description.initial="'required|min:3|max:400'" :class="{'input': true, 'is-danger': errors.has('description') }" type="text" placeholder="Votre description de la plante"></textarea>
+                <textarea rows="10" cols="80" name="description" data-vv-as="La description" v-model="description" v-validate:description.initial="'required|min:3|max:400'" :class="{'input': true, 'is-danger': errors.has('description') }" type="text" placeholder="Votre description de la plante"></textarea>
                 <i v-show="errors.has('description')" class="fa fa-warning"></i>
                 <span v-show="errors.has('description')" class="alert alert-danger">{{ errors.first('description') }}</span> 
             </p>
             
             <p class="control has-icon has-icon-right"> 
                 <label class="control-label">Origine Géographique</label>
-                <input name="origine_geographique" data-vv-as="Origine Géographique" v-model="origine_geographique" v-validate:origine_geographique.initial="'required|min:3|max:50'" :class="{'input': true, 'is-danger': errors.has('origine_geographique') }" type="text" placeholder="Origine de la plante">
+                <input name="origine_geographique" data-vv-as="Origine Géographique" data-vv-as="L'origine géographique" v-model="origine_geographique" v-validate:origine_geographique.initial="'required|min:3|max:50'" :class="{'input': true, 'is-danger': errors.has('origine_geographique') }" type="text" placeholder="Origine de la plante">
                 <i v-show="errors.has('origine_geographique')" class="fa fa-warning"></i>
                 <span v-show="errors.has('origine_geographique')" class="alert alert-danger">{{ errors.first('origine_geographique') }}</span> 
             </p>
             
             <p class="control has-icon has-icon-right"> 
                 <label class="control-label">Ancienneté de culture</label>
-                <input name="anciennete_culture" v-model="anciennete_culture" v-validate:anciennete_culture.initial="'required|min:3|max:50'" :class="{'input': true, 'is-danger': errors.has('anciennete_culture') }" type="text" placeholder="Depuis combien de temps est-elle cultivée ?">
+                <input name="anciennete_culture" v-model="anciennete_culture" data-vv-as="L'ancienneté de culture" v-validate:anciennete_culture.initial="'required|min:3|max:50'" :class="{'input': true, 'is-danger': errors.has('anciennete_culture') }" type="text" placeholder="Depuis combien de temps est-elle cultivée ?">
                 <i v-show="errors.has('anciennete_culture')" class="fa fa-warning"></i>
                 <span v-show="errors.has('anciennete_culture')" class="alert alert-danger">{{ errors.first('anciennete_culture') }}</span> 
             </p>
             
             <p class="control has-icon has-icon-right"> 
                 <label class="control-label">Cycle</label>
-                <input name="cycle" v-model="cycle" v-validate:cycle.initial="'required|min:3|max:50'" :class="{'input': true, 'is-danger': errors.has('cycle') }" type="text" placeholder="Cycle dans votre région">
+                <input name="cycle" v-model="cycle" data-vv-as="Le cycle" v-validate:cycle.initial="'required|min:3|max:50'" :class="{'input': true, 'is-danger': errors.has('cycle') }" type="text" placeholder="Cycle dans votre région">
                 <i v-show="errors.has('cycle')" class="fa fa-warning"></i>
                 <span v-show="errors.has('cycle')" class="alert alert-danger">{{ errors.first('cycle') }}</span> 
             </p>
             
             <p class="control has-icon has-icon-right">
-                <legend class="control-label">La plante sera t-elle cultivée comme un engrais vert ?</legend>
+                <label class="control-label">La plante sera t-elle cultivée comme un engrais vert ?</label>
                 <label>
-                    <input name="engrais_vert" v-validate="'required|in:1,0'" value="1" type="radio" v-model="engrais_vert">
+                    <input name="engrais_vert" data-vv-as="La réponse" v-validate="'required|in:1,0'" value="1" type="radio" v-model="engrais_vert">
                     Oui
                 </label>
                 <label>
@@ -72,9 +72,9 @@
             </p>
             
             <p class="control has-icon has-icon-right">
-                <legend class="control-label">La plante sera t-elle cultivée comme une plante compagne ?</legend>
+                <label class="control-label">La plante sera t-elle cultivée comme une plante compagne ?</label>
                 <label>
-                    <input name="compagne" v-validate="'required|in:1,0'" value="1" type="radio" v-model="compagne">
+                    <input name="compagne" data-vv-as="La réponse" v-validate="'required|in:1,0'" value="1" type="radio" v-model="compagne">
                     Oui
                 </label>
                 <label>
@@ -90,28 +90,28 @@
                 
             <p class="control has-icon has-icon-right"> 
                 <label class="control-label">Climat favorable :</label><br>
-                <textarea rows="3" cols="30" name="climat_favorable" v-model="climat_favorable" v-validate:climat_favorable.initial="'required|max:100'" :class="{'input': true, 'is-danger': errors.has('climat_favorable') }" type="text" placeholder="Eléments favorables"></textarea>
+                <textarea rows="3" cols="30" name="climat_favorable" data-vv-as="Le climat favorable" v-model="climat_favorable" v-validate:climat_favorable.initial="'required|max:100'" :class="{'input': true, 'is-danger': errors.has('climat_favorable') }" type="text" placeholder="Eléments favorables"></textarea>
                 <i v-show="errors.has('climat_favorable')" class="fa fa-warning"></i>
                 <span v-show="errors.has('climat_favorable')" class="alert alert-danger">{{ errors.first('climat_favorable') }}</span> 
             </p>
                 
             <p class="control has-icon has-icon-right"> 
                 <label class="control-label">Climat défavorable :</label><br>
-                <textarea rows="3" cols="30" name="climat_defavorable" v-model="climat_defavorable" v-validate:climat_defavorable.initial="'required|max:100'" :class="{'input': true, 'is-danger': errors.has('climat_defavorable') }" type="text" placeholder="Eléments défavorables"></textarea>
+                <textarea rows="3" cols="30" name="climat_defavorable" data-vv-as="Le climat défavorable" v-model="climat_defavorable" v-validate:climat_defavorable.initial="'required|max:100'" :class="{'input': true, 'is-danger': errors.has('climat_defavorable') }" type="text" placeholder="Eléments défavorables"></textarea>
                 <i v-show="errors.has('climat_defavorable')" class="fa fa-warning"></i>
                 <span v-show="errors.has('climat_defavorable')" class="alert alert-danger">{{ errors.first('climat_defavorable') }}</span> 
             </p>
                 
             <p class="control has-icon has-icon-right"> 
                 <label class="control-label">Commentaires sur le climat :</label><br>
-                <textarea rows="3" cols="30" name="commentaire_climat" v-model="commentaire_climat" v-validate:commentaire_climat.initial="'required|max:100'" :class="{'input': true, 'is-danger': errors.has('commentaire_climat') }" type="text" placeholder="Commentaires"></textarea>
+                <textarea rows="3" cols="30" name="commentaire_climat" data-vv-as="Le commentaire" v-model="commentaire_climat" v-validate:commentaire_climat.initial="'required|max:100'" :class="{'input': true, 'is-danger': errors.has('commentaire_climat') }" type="text" placeholder="Commentaires"></textarea>
                 <i v-show="errors.has('commentaire_climat')" class="fa fa-warning"></i>
                 <span v-show="errors.has('commentaire_climat')" class="alert alert-danger">{{ errors.first('commentaire_climat') }}</span> 
             </p>
                 
             <p class="control has-icon has-icon-right">
                 <label class="control-label">Gel en dessous de :</label><br>
-                <input v-validate:temp_gel.initial="'required|decimal'" :class="{'input': true, 'is-danger': errors.has('temp_gel') }" type="number" name="temp_gel" min="-30" max="20" v-model="temp_gel">
+                <input data-vv-as="La température" v-validate:temp_gel.initial="'required|decimal'" :class="{'input': true, 'is-danger': errors.has('temp_gel') }" type="number" name="temp_gel" min="-30" max="20" v-model="temp_gel">
                 <i v-show="errors.has('temp_gel')" class="fa fa-warning"></i>
                 <span v-show="errors.has('temp_gel')" class="alert alert-danger">{{ errors.first('temp_gel') }}</span> 
             </p>
@@ -121,21 +121,21 @@
                 
             <p class="control has-icon has-icon-right"> 
                 <label class="control-label">Sol favorable :</label><br>
-                <textarea rows="3" cols="30" name="sol_favorable" v-model="sol_favorable" v-validate:sol_favorable.initial="'required|max:100'" :class="{'input': true, 'is-danger': errors.has('sol_favorable') }" type="text" placeholder="Eléments favorables"></textarea>
+                <textarea rows="3" cols="30" name="sol_favorable" data-vv-as="Le sol favorable" v-model="sol_favorable" v-validate:sol_favorable.initial="'required|max:100'" :class="{'input': true, 'is-danger': errors.has('sol_favorable') }" type="text" placeholder="Eléments favorables"></textarea>
                 <i v-show="errors.has('sol_favorable')" class="fa fa-warning"></i>
                 <span v-show="errors.has('sol_favorable')" class="alert alert-danger">{{ errors.first('sol_favorable') }}</span> 
             </p>
                 
             <p class="control has-icon has-icon-right">
                 <label class="control-label">Sol défavorable :</label><br>
-                <textarea rows="3" cols="30" name="sol_defavorable" v-model="sol_defavorable" v-validate:sol_defavorable.initial="'required|max:100'" :class="{'input': true, 'is-danger': errors.has('sol_defavorable') }" type="text" placeholder="Eléments défavorables"></textarea>
+                <textarea rows="3" cols="30" name="sol_defavorable" data-vv-as="Le sol défavorable" v-model="sol_defavorable" v-validate:sol_defavorable.initial="'required|max:100'" :class="{'input': true, 'is-danger': errors.has('sol_defavorable') }" type="text" placeholder="Eléments défavorables"></textarea>
                 <i v-show="errors.has('sol_defavorable')" class="fa fa-warning"></i>
                 <span v-show="errors.has('sol_defavorable')" class="alert alert-danger">{{ errors.first('sol_defavorable') }}</span> 
             </p>
                 
             <p class="control has-icon has-icon-right"> 
                 <label class="control-label">Commentaires sur le sol :</label><br>
-                <textarea rows="3" cols="30" name="commentaire_sol" v-model="commentaire_sol" v-validate:commentaire_sol.initial="'required|max:100'" :class="{'input': true, 'is-danger': errors.has('commentaire_sol') }" type="text" placeholder="Commentaires"></textarea>
+                <textarea rows="3" cols="30" name="commentaire_sol" data-vv-as="Le commentaire" v-model="commentaire_sol" v-validate:commentaire_sol.initial="'required|max:100'" :class="{'input': true, 'is-danger': errors.has('commentaire_sol') }" type="text" placeholder="Commentaires"></textarea>
                 <i v-show="errors.has('commentaire_sol')" class="fa fa-warning"></i>
                 <span v-show="errors.has('commentaire_sol')" class="alert alert-danger">{{ errors.first('commentaire_sol') }}</span> 
             </p>
@@ -146,29 +146,29 @@
                        
             <p class="control has-icon has-icon-right"> 
                 <label class="control-label">Fertilisation favorable :</label><br>
-                <textarea rows="3" cols="30" name="fertilisation_favorable" v-model="fertilisation_favorable" v-validate:fertilisation_favorable.initial="'required|max:100'" :class="{'input': true, 'is-danger': errors.has('fertilisation_favorable') }" type="text" placeholder="Eléments favorables"></textarea>
+                <textarea rows="3" cols="30" name="fertilisation_favorable" data-vv-as="La fertilisation favorable" v-model="fertilisation_favorable" v-validate:fertilisation_favorable.initial="'required|max:100'" :class="{'input': true, 'is-danger': errors.has('fertilisation_favorable') }" type="text" placeholder="Eléments favorables"></textarea>
                 <i v-show="errors.has('fertilisation_favorable')" class="fa fa-warning"></i>
                 <span v-show="errors.has('fertilisation_favorable')" class="alert alert-danger">{{ errors.first('fertilisation_favorable') }}</span> 
             </p>
                 
             <p class="control has-icon has-icon-right">
                 <label class="control-label">Fertilisation défavorable :</label><br>
-                <textarea rows="3" cols="30" name="fertilisation_defavorable" v-model="fertilisation_defavorable" v-validate:fertilisation_defavorable.initial="'required|max:100'" :class="{'input': true, 'is-danger': errors.has('fertilisation_defavorable') }" type="text" placeholder="Eléments défavorables"></textarea>
+                <textarea rows="3" cols="30" name="fertilisation_defavorable" data-vv-as="La fertilisation défavorable" v-model="fertilisation_defavorable" v-validate:fertilisation_defavorable.initial="'required|max:100'" :class="{'input': true, 'is-danger': errors.has('fertilisation_defavorable') }" type="text" placeholder="Eléments défavorables"></textarea>
                 <i v-show="errors.has('fertilisation_defavorable')" class="fa fa-warning"></i>
                 <span v-show="errors.has('fertilisation_defavorable')" class="alert alert-danger">{{ errors.first('fertilisation_defavorable') }}</span> 
             </p>
                 
             <p class="control has-icon has-icon-right"> 
                 <label class="control-label">Commentaires sur la fertilisation :</label><br>
-                <textarea rows="3" cols="30" name="commentaire_fertilisation" v-model="commentaire_fertilisation" v-validate:commentaire_fertilisation.initial="'required|max:100'" :class="{'input': true, 'is-danger': errors.has('commentaire_fertilisation') }" type="text" placeholder="Commentaires"></textarea>
+                <textarea rows="3" cols="30" name="commentaire_fertilisation" data-vv-as="Le commentaire" v-model="commentaire_fertilisation" v-validate:commentaire_fertilisation.initial="'required|max:100'" :class="{'input': true, 'is-danger': errors.has('commentaire_fertilisation') }" type="text" placeholder="Commentaires"></textarea>
                 <i v-show="errors.has('commentaire_fertilisation')" class="fa fa-warning"></i>
                 <span v-show="errors.has('commentaire_fertilisation')" class="alert alert-danger">{{ errors.first('commentaire_fertilisation') }}</span> 
             </p>
             
             <p class="control has-icon has-icon-right">
-                <legend class="control-label">La plante supporte-t-elle le fumier frais ?</legend>
+                <label class="control-label">La plante supporte-t-elle le fumier frais ?</label>
                 <label>
-                    <input name="fumier_frais" v-validate="'required|in:1,0'" value="1" type="radio" v-model="fumier_frais">
+                    <input name="fumier_frais" data-vv-as="La réponse" v-validate="'required|in:1,0'" value="1" type="radio" v-model="fumier_frais">
                     Oui
                 </label>
                 <label>
@@ -183,15 +183,15 @@
             <fieldset><legend>Durée de rotation</legend>
             
             <p class="control has-icon has-icon-right">
-                <legend class="control-label">Nombre d'années :</legend>
-                <input v-validate:duree_rotation.initial="'required|decimal'" :class="{'input': true, 'is-danger': errors.has('duree_rotation') }" type="number" name="duree_rotation" min="0" max="10" v-model="duree_rotation">
+                <label class="control-label">Nombre d'années :</label>
+                <input data-vv-as="Le nombre d'années" v-validate:duree_rotation.initial="'required|decimal'" :class="{'input': true, 'is-danger': errors.has('duree_rotation') }" type="number" name="duree_rotation" min="0" max="10" v-model="duree_rotation">
                 <i v-show="errors.has('duree_rotation')" class="fa fa-warning"></i>
                 <span v-show="errors.has('duree_rotation')" class="alert alert-danger">{{ errors.first('duree_rotation') }}</span>
             </p>
                     
             <p class="control has-icon has-icon-right"> 
                 <label class="control-label">Commentaires :</label><br>
-                <textarea rows="3" cols="30" name="commentaire_duree" v-model="commentaire_duree" v-validate:commentaire_duree.initial="'required|max:100'" :class="{'input': true, 'is-danger': errors.has('commentaire_duree') }" type="text" placeholder="Commentaires"></textarea>
+                <textarea rows="3" cols="30" name="commentaire_duree" data-vv-as="Le commentaire" v-model="commentaire_duree" v-validate:commentaire_duree.initial="'required|max:100'" :class="{'input': true, 'is-danger': errors.has('commentaire_duree') }" type="text" placeholder="Commentaires"></textarea>
                 <i v-show="errors.has('commentaire_duree')" class="fa fa-warning"></i>
                 <span v-show="errors.has('commentaire_duree')" class="alert alert-danger">{{ errors.first('commentaire_duree') }}</span> 
             </p>
@@ -202,42 +202,42 @@
                 
                 <p class="control has-icon has-icon-right">
                     <label class="control-label">Rendement retenu en tonne par hectare</label>
-                    <input v-validate:rendement.initial="'required|decimal'" :class="{'input': true, 'is-danger': errors.has('rendement') }" type="number" name="rendement" v-model="rendement" min="0" max="100">
+                    <input data-vv-as="Le rendement" v-validate:rendement.initial="'required|decimal'" :class="{'input': true, 'is-danger': errors.has('rendement') }" type="number" name="rendement" v-model="rendement" min="0" max="100">
                     <i v-show="errors.has('rendement')" class="fa fa-warning"></i>
                     <span v-show="errors.has('rendement')" class="alert alert-danger">{{ errors.first('rendement') }}</span>
                 </p>
                     
                 <p class="control has-icon has-icon-right">
                     <label class="control-label">N</label>
-                    <input v-validate:azote.initial="'required|decimal'" :class="{'input': true, 'is-danger': errors.has('azote') }" type="number" name="azote" v-model="azote" min="0" max="600">
+                    <input data-vv-as="L'azote" v-validate:azote.initial="'required|decimal'" :class="{'input': true, 'is-danger': errors.has('azote') }" type="number" name="azote" v-model="azote" min="0" max="600">
                     <i v-show="errors.has('azote')" class="fa fa-warning"></i>
                     <span v-show="errors.has('azote')" class="alert alert-danger">{{ errors.first('azote') }}</span>
                 </p>
                 
                 <p class="control has-icon has-icon-right">
                     <label class="control-label">P2O5</label>
-                    <input v-validate:phosphore.initial="'required|decimal'" :class="{'input': true, 'is-danger': errors.has('phosphore') }" type="number" name="phosphore" v-model="phosphore" min="0" max="600">
+                    <input data-vv-as="Le phosphore" v-validate:phosphore.initial="'required|decimal'" :class="{'input': true, 'is-danger': errors.has('phosphore') }" type="number" name="phosphore" v-model="phosphore" min="0" max="600">
                     <i v-show="errors.has('phosphore')" class="fa fa-warning"></i>
                     <span v-show="errors.has('phosphore')" class="alert alert-danger">{{ errors.first('phosphore') }}</span>
                 </p>
                             
                 <p class="control has-icon has-icon-right">
                     <label class="control-label">K2O</label>
-                    <input v-validate:potassium.initial="'required|decimal'" :class="{'input': true, 'is-danger': errors.has('potassium') }" type="number" name="potassium" v-model="potassium" min="0" max="600">
+                    <input data-vv-as="Le potassium" v-validate:potassium.initial="'required|decimal'" :class="{'input': true, 'is-danger': errors.has('potassium') }" type="number" name="potassium" v-model="potassium" min="0" max="600">
                     <i v-show="errors.has('potassium')" class="fa fa-warning"></i>
                     <span v-show="errors.has('potassium')" class="alert alert-danger">{{ errors.first('potassium') }}</span>
                 </p>
                         
                 <p class="control has-icon has-icon-right">
                     <label class="control-label">CaO</label>
-                    <input v-validate:calcium.initial="'required|decimal'" :class="{'input': true, 'is-danger': errors.has('calcium') }" type="number" name="calcium" v-model="calcium" min="0" max="600">
+                    <input data-vv-as="Le calcium" v-validate:calcium.initial="'required|decimal'" :class="{'input': true, 'is-danger': errors.has('calcium') }" type="number" name="calcium" v-model="calcium" min="0" max="600">
                     <i v-show="errors.has('calcium')" class="fa fa-warning"></i>
                     <span v-show="errors.has('calcium')" class="alert alert-danger">{{ errors.first('calcium') }}</span>
                 </p>
                         
                 <p class="control has-icon has-icon-right">
                     <label class="control-label">MgO</label>
-                    <input v-validate:magnesium.initial="'required|decimal'" :class="{'input': true, 'is-danger': errors.has('magnesium') }" type="number" name="magnesium" v-model="magnesium" min="0" max="600">
+                    <input data-vv-as="Le magnésium" v-validate:magnesium.initial="'required|decimal'" :class="{'input': true, 'is-danger': errors.has('magnesium') }" type="number" name="magnesium" v-model="magnesium" min="0" max="600">
                     <i v-show="errors.has('magnesium')" class="fa fa-warning"></i>
                     <span v-show="errors.has('magnesium')" class="alert alert-danger">{{ errors.first('magnesium') }}</span>
                 </p>
