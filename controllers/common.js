@@ -13,6 +13,8 @@ exports.setModules = function () {
     NA.models.Variete = require('../models/connectors/variete.js');
     NA.models.Famille = require('../models/connectors/famille.js');
     NA.models.Groupe = require('../models/connectors/groupe.js');
+    NA.models.Semi = require('../models/connectors/semi.js');
+    NA.models.Tunnel = require('../models/connectors/tunnel.js');
 };
  
 exports.setConfigurations = function (next) {

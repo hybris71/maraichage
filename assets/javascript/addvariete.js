@@ -9,7 +9,7 @@ NA.socket.on("get-form-variete", function (data) {
         
             console.log("socket on get form!");
             var addVariete = vueAddVariete(data.view, data.data, function (data) {
-                console.log("add variete")
+                console.log("add variete");
                 NA.socket.emit("add-variete", data);
             });
             addVariete.$mount(".main");

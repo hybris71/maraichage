@@ -17,6 +17,68 @@ function Variete(connection) {
     };
 
     variete.call(publics);
+    
+    publics.create = function (callback) {
+    	var insert = "INSERT INTO varietes (",
+    		values = ") VALUES (";
+
+		
+		if (publics.nom_variete()) { insert += "`nom_variete`, "; }
+        if (publics.description()) { insert += "`description`, "; }
+        if (publics.ref_plante()) { insert += "`ref_plante`, "; }
+
+		insert = insert.replace(/, $/g, "");
+
+		if (publics.nom_variete()) { values += '"' + publics.nom_variete() + '", '; }
+        if (publics.description()) { values += '"' + publics.description() + '", '; }
+        if (publics.ref_plante()) { values += '"' + publics.ref_plante() + '", '; }
+		
+		values = values.replace(/, $/g, ")");
+
+		privates.connection.query(insert + values, function (err, infos) {
+			if (err) {
+				throw err;
+			}
+            
+            publics.id_variete(infos.insertId);
+
+			if (callback) {
+				callback(infos);
+			}
+		});
+
+		return publics;
+    };
+    
+    publics.createGraine = function (callback) {
+    	var insert = "INSERT INTO graines (",
+    		values = ") VALUES (";
+
+		
+        if (publics.graine_duree_vie()) { insert += "`duree_vie`, "; }
+        if (publics.graine_pmg()) { insert += "`pmg`, "; }
+		if (publics.id_variete()) { insert += "`ref_variete`, "; }
+
+		insert = insert.replace(/, $/g, "");
+
+        if (publics.graine_duree_vie()) { values += '"' + publics.graine_duree_vie() + '", '; }
+        if (publics.graine_pmg()) { values += '"' + publics.graine_pmg() + '", '; }
+        if (publics.id_variete()) { values += '"' + publics.id_variete() + '", '; }
+		
+		values = values.replace(/, $/g, ")");
+
+		privates.connection.query(insert + values, function (err, infos) {
+			if (err) {
+				throw err;
+			}
+
+			if (callback) {
+				callback(infos);
+			}
+		});
+
+		return publics;
+    };
 	
     publics.readAll = function (callback) {
         var select = `SELECT

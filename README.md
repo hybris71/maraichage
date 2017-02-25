@@ -28,10 +28,33 @@ En cours de développpement :
 - Page : Ajout des variétés 
 - Page : Affichage & Modification des variétés
 
+To-do :
+- Ajouter le Rendement espéré dans l'itinéaire du semi :
+	- Reflexions pour l'intégration :
+		- par mètre carré ? 
+		- En fonction de la densité du semi et du temps de récolte ?
+
+- Ajouter les plages de recoltes :
+	- Reflexions pour l'intégration :
+		- Calculer avec un temps de croissance jusqu'à maturité ?
+		- Durée de la récolte : en semaine ? 
+
+- Ajouter le stockage à l'itinéraire de la variété
+
+- Ajouter des tâches de tuteurage à l'itinéraire de la variété 
+
+- Ajouter Tâches diverses à l'itinéraire de la variété
+
+- Ajouter la validation "between" pour les données chiffrés dans les formulaires
+
+- A Corriger : 
+	- Formulaire Ajout d'une variété : Suppression du tableau repiquages quand un changement de modalité de semi à lieu après une première sélection 
+	- Page variete.htm hors service pour le moment
+
 Développement futur :
 - Page : Ajout des planches de culture & Modification
 - Page : Ajout des productions envisagées (Choix des variétés et rendement souhaité) & Modification -> Cela générera les quantités de semences nécessaires, vérification de l'espace disponible sur les planches.
-- Page : Ajout des tâches qui pourront être associés aux variétés
+- Page : Ajout des tâches qui pourront être associés aux planches ?
 - Pour chaque production, application du choix idéal de la planche et création du planning des tâches associés
 ...
 

@@ -56,7 +56,7 @@ exports.setSockets = function () {
             });
         });
         
-        socket.on("update-plante", function (data) {
+        socket.on("update-variete", function (data) {
         
             console.log("update variete");
         

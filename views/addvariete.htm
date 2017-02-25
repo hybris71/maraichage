@@ -1,55 +1,296 @@
     <div class="main container">
         <h1><?- specific.titlePage ?></h1>
 
-        <form @submit.prevent="validateBeforeSubmit" v-if="!formSubmitted">
+        <form @submit.prevent="validateBeforeSubmit('form-1')" v-if="!formSubmitted">
             
             <p>Nom de la plante <strong>{{ nom_plante }}</strong></p>
             <p id="id_plante">ID de la plante <strong>{{ id_plante }}</strong></p>
             
             <fieldset><legend>Généralités</legend>
-                <p class="control has-icon has-icon-right"> 
+                <p class="control has-icon has-icon-right">
                     <label class="control-label">Nom de la variété</label>
-                    <input name="nom_variete" data-vv-as="Le nom de la variété" v-model="nom_variete" v-validate:nom_variete.initial="'required|min:3|max:50'" :class="{'input': true, 'is-danger': errors.has('nom_variete') }" type="text" placeholder="Nom Commun">
-                    <i v-show="errors.has('nom_variete')" class="fa fa-warning"></i>
-                    <span v-show="errors.has('nom_variete')" class="alert alert-danger">{{ errors.first('nom_variete') }}</span> 
+                    <input data-vv-scope="form-1" name="nom_variete" data-vv-as="Le nom de la variété" v-model="nom_variete" v-validate:nom_variete.initial="'required|min:3|max:50'" :class="{'input': true, 'is-danger': errors.has('form-1.nom_variete') }" type="text" placeholder="Nom Commun">
+                    <i v-show="errors.has('form-1.nom_variete')" class="fa fa-warning"></i>
+                    <span v-show="errors.has('form-1.nom_variete')" class="alert alert-danger">{{ errors.first('form-1.nom_variete') }}</span> 
                 </p>
 
                 <p class="control has-icon has-icon-right"> 
                     <label class="control-label">Description de la variété</label><br>
-                    <textarea rows="10" cols="80" name="description" data-vv-as="La description" v-model="description" v-validate:description.initial="'required|min:3|max:200'" :class="{'input': true, 'is-danger': errors.has('description') }" type="text" placeholder="Votre description de la plante"></textarea>
-                    <i v-show="errors.has('description')" class="fa fa-warning"></i>
-                    <span v-show="errors.has('description')" class="alert alert-danger">{{ errors.first('description') }}</span>
+                    <textarea data-vv-scope="form-1" rows="10" cols="80" name="description" data-vv-as="La description" v-model="description" v-validate:description.initial="'required|min:3|max:2000'" :class="{'input': true, 'is-danger': errors.has('form-1.description') }" type="text" placeholder="Votre description de la variété"></textarea>
+                    <i v-show="errors.has('form-1.description')" class="fa fa-warning"></i>
+                    <span v-show="errors.has('form-1.description')" class="alert alert-danger">{{ errors.first('form-1.description') }}</span>
                 </p>
             </fieldset>
             
             <fieldset><legend>Graines</legend>
                 <p class="control has-icon has-icon-right">
                     <label class="control-label">Durée de vie en année</label>
-                    <input data-vv-as="Le nombre d'années" v-validate:duree_vie.initial="'required|decimal'" :class="{'input': true, 'is-danger': errors.has('duree_vie') }" type="number" name="duree_vie" min="1" max="100" v-model="duree_vie">
-                    <i v-show="errors.has('duree_vie')" class="fa fa-warning"></i>
-                    <span v-show="errors.has('duree_vie')" class="alert alert-danger">{{ errors.first('duree_vie') }}</span>
+                    <input data-vv-scope="form-1" data-vv-as="Le nombre d'années" v-validate:duree_vie.initial="'required|decimal'" :class="{'input': true, 'is-danger': errors.has('form-1.duree_vie') }" type="number" name="duree_vie" min="1" max="100" v-model="duree_vie">
+                    <i v-show="errors.has('form-1.duree_vie')" class="fa fa-warning"></i>
+                    <span v-show="errors.has('form-1.duree_vie')" class="alert alert-danger">{{ errors.first('form-1.duree_vie') }}</span>
                 </p>
                 
                 <p class="control has-icon has-icon-right">
-                    <label class="control-label">PMG (Poids de Mille Grains) en grammes</label>
-                    <input data-vv-as="Le PMG" v-validate:pmg.initial="'required|decimal'" :class="{'input': true, 'is-danger': errors.has('pmg') }" type="number" name="pmg" min="1" max="1000" v-model="pmg">
-                    <i v-show="errors.has('pmg')" class="fa fa-warning"></i>
-                    <span v-show="errors.has('pmg')" class="alert alert-danger">{{ errors.first('pmg') }}</span>
+                    <label class="control-label">PMG (Poids de Mille Graines) en grammes</label>
+                    <input data-vv-scope="form-1" data-vv-as="Le PMG" v-validate:pmg.initial="'required|decimal'" :class="{'input': true, 'is-danger': errors.has('form-1.pmg') }" type="number" name="pmg" min="1" max="1000" v-model="pmg">
+                    <i v-show="errors.has('form-1.pmg')" class="fa fa-warning"></i>
+                    <span v-show="errors.has('form-1.pmg')" class="alert alert-danger">{{ errors.first('form-1.pmg') }}</span>
                 </p>
             </fieldset>
             
-            <fieldset><legend>Semi</legend>
-            
+            <fieldset><legend>Itinéraires techniques</legend>
+            <p>Vous allez pouvoir ici créer plusieurs itinéraires techniques si vous le souhaitez, par exemple un semi direct en plein champ, un semi en godet etc.</p>
                 
-            
+                <table v-if="semis.length" class="table table-bordered">
+                    <tbody>
+                        <tr class="active">
+                            <th class="text-center">Titre de l'itinéraire</th>
+                            <th class="text-center">Modalité</th>
+                            <th class="text-center">Début semi</th>
+                            <th class="text-center">Fin semi</th>
+                            <th class="text-center">Profondeur</th>
+                            <th class="text-center">Température</th>
+                            <th class="text-center">Taux germination</th>
+                            <th class="text-center">Temps de levée</th>
+                            <th class="text-center">Distance entre les rangs</th>
+                            <th class="text-center">Distance sur rang</th>
+                            <th class="text-center">Repiquages</th>
+                            <th class="text-center">Tunnels</th>
+                            <th class="text-center">Action</th>
+                        </tr>
+                        <tr v-for="(semi, index) in semis">
+                            <td>{{ semi.titre }}</td>
+                            <td>{{ semi.modalite_description }}</td> 
+                            <td>{{ semi.debut_semi }}</td>
+                            <td>{{ semi.fin_semi }}</td>
+                            <td>{{ semi.profondeur }}</td>
+                            <td>{{ semi.temperature_germi }}</td>
+                            <td>{{ semi.taux_germi }}</td>
+                            <td>{{ semi.temps_levee_jour }}</td>
+                            <td>{{ semi.distance_entre_rang }}</td>
+                            <td>{{ semi.distance_sur_rang }}</td>
+                            <td>
+                                <table v-if="semi.repiquages.length" class="table table-bordered">
+                                    <tbody>
+                                        <tr class="active">
+                                            <th class="text-center">Début</th>
+                                            <th class="text-center">Fin</th>
+                                            <th class="text-center">Commentaire</th>
+                                        </tr>
+                                        <tr v-for="(repiquage, index) in semi.repiquages">
+                                            <td>{{ repiquage.debut_repi }}</td>
+                                            <td>{{ repiquage.fin_repi }}</td>
+                                            <td>{{ repiquage.repi_commentaire }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                            <td>
+                                <table v-if="semi.tunnels.length" class="table table-bordered">
+                                    <tbody>
+                                        <tr class="active">
+                                            <th class="text-center">Type</th>
+                                            <th class="text-center">Début</th>
+                                            <th class="text-center">Fin</th>
+                                            <th class="text-center">Commentaire</th>
+                                        </tr>
+                                        <tr v-for="(tunnel, index) in semi.tunnels">
+                                            <td>{{ tunnel.type_tunnel }}</td>
+                                            <td>{{ tunnel.debut_tunnel }}</td>
+                                            <td>{{ tunnel.fin_tunnel }}</td>
+                                            <td>{{ tunnel.commentaire_tunnel }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                            <td class="text-center"><button v-on:click="removeSemi(index)" type="button" class="btn btn-danger">Supprimer</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                      <h3 class="panel-title">Itinéraire</h3>
+                    </div>
+                    <div class="panel-body">
+                    
+                        <p class="control has-icon has-icon-right">
+                            <label class="control-label">Titre</label>
+                            <input data-vv-scope="form-2" data-vv-as="Le titre" v-validate:newSemiTitre.initial="'required|max:100'" :class="{'input': true, 'is-danger': errors.has('form-2.newSemiTitre') }" type="text" name="newSemiTitre" v-model="newSemiTitre" placeholder="Titre de votre choix">
+                            <i v-show="errors.has('form-2.newSemiTitre')" class="fa fa-warning"></i>
+                            <span v-show="errors.has('form-2.newSemiTitre')" class="alert alert-danger">{{ errors.first('form-2.newSemiTitre') }}</span>
+                        </p>
+                        
+                        <p class="control has-icon has-icon-right">
+                            <label class="control-label">Modalité</label>
+                            <select v-model="index_modalite">
+                                <option v-for="(modalite, index) in listModalites" v-bind:value="index">
+                                    {{ modalite.description }}
+                                </option>
+                            </select>
+                        </p>
+
+                        <p class="control has-icon has-icon-right">
+                            <label class="control-label">Début semi (Numéro de semaine)</label>
+                            <input data-vv-scope="form-2" data-vv-as="La numéro de semaine" v-validate:nSemiDebut.initial="'required|decimal'" :class="{'input': true, 'is-danger': errors.has('form-2.nSemiDebut') }" type="number" name="nSemiDebut" min="1" max="52" v-model="nSemiDebut">
+                            <i v-show="errors.has('form-2.nSemiDebut')" class="fa fa-warning"></i>
+                            <span v-show="errors.has('form-2.nSemiDebut')" class="alert alert-danger">{{ errors.first('form-2.nSemiDebut') }}</span>
+                        </p>
+                        
+                        <p class="control has-icon has-icon-right">
+                            <label class="control-label">Fin semi (Numéro de semaine)</label>
+                            <input data-vv-scope="form-2" data-vv-as="La numéro de semaine" v-validate:nSemiFin.initial="'required|decimal'" :class="{'input': true, 'is-danger': errors.has('form-2.nSemiFin') }" type="number" name="nSemiFin" min="1" max="52" v-model="nSemiFin">
+                            <i v-show="errors.has('form-2.nSemiFin')" class="fa fa-warning"></i>
+                            <span v-show="errors.has('form-2.nSemiFin')" class="alert alert-danger">{{ errors.first('form-2.nSemiFin') }}</span>
+                        </p>
+                        
+                        <p class="control has-icon has-icon-right">
+                            <label class="control-label">Profondeur (en centimètre)</label>
+                            <input data-vv-scope="form-2" data-vv-as="La profondeur" v-validate:nProfondeur.initial="'required|decimal'" :class="{'input': true, 'is-danger': errors.has('form-2.nProfondeur') }" type="number" name="nProfondeur" min="1" max="20" v-model="nProfondeur">
+                            <i v-show="errors.has('form-2.nProfondeur')" class="fa fa-warning"></i>
+                            <span v-show="errors.has('form-2.nProfondeur')" class="alert alert-danger">{{ errors.first('form-2.nProfondeur') }}</span>
+                        </p>
+                        
+                        <p class="control has-icon has-icon-right">
+                            <label class="control-label">Température (en degré celsius)</label>
+                            <input data-vv-scope="form-2" data-vv-as="La température" v-validate:nTemperatureGermi.initial="'required|decimal'" :class="{'input': true, 'is-danger': errors.has('form-2.nTemperatureGermi') }" type="number" name="nTemperatureGermi" min="1" max="30" v-model="nTemperatureGermi">
+                            <i v-show="errors.has('form-2.nTemperatureGermi')" class="fa fa-warning"></i>
+                            <span v-show="errors.has('form-2.nTemperatureGermi')" class="alert alert-danger">{{ errors.first('form-2.nTemperatureGermi') }}</span>
+                        </p>
+                        
+                        <p class="control has-icon has-icon-right">
+                            <label class="control-label">Taux de germination (en pourcentage)</label>
+                            <input data-vv-scope="form-2" data-vv-as="Le taux" v-validate:nTauxGermi.initial="'required|decimal'" :class="{'input': true, 'is-danger': errors.has('form-2.nTauxGermi') }" type="number" name="nTauxGermi" min="1" max="100" v-model="nTauxGermi">
+                            <i v-show="errors.has('form-2.nTauxGermi')" class="fa fa-warning"></i>
+                            <span v-show="errors.has('form-2.nTauxGermi')" class="alert alert-danger">{{ errors.first('form-2.nTauxGermi') }}</span>
+                        </p>
+                        
+                         <p class="control has-icon has-icon-right">
+                            <label class="control-label">Temps de levée (en jours)</label>
+                            <input data-vv-scope="form-2" data-vv-as="Le temps" v-validate:nTempsLevee.initial="'required|decimal'" :class="{'input': true, 'is-danger': errors.has('form-2.nTempsLevee') }" type="number" name="nTempsLevee" min="1" max="30" v-model="nTempsLevee">
+                            <i v-show="errors.has('form-2.nTempsLevee')" class="fa fa-warning"></i>
+                            <span v-show="errors.has('form-2.nTempsLevee')" class="alert alert-danger">{{ errors.first('form-2.nTempsLevee') }}</span>
+                        </p>
+                        
+                        <p class="control has-icon has-icon-right">
+                            <label class="control-label">Distance entre les rangs (en centimètre)</label>
+                            <input data-vv-scope="form-2" data-vv-as="La distance" v-validate:nDistanceEntreRangs.initial="'required|decimal'" :class="{'input': true, 'is-danger': errors.has('form-2.nDistanceEntreRangs') }" type="number" name="nDistanceEntreRangs" min="1" max="200" v-model="nDistanceEntreRangs">
+                            <i v-show="errors.has('form-2.nDistanceEntreRangs')" class="fa fa-warning"></i>
+                            <span v-show="errors.has('form-2.nDistanceEntreRangs')" class="alert alert-danger">{{ errors.first('form-2.nDistanceEntreRangs') }}</span>
+                        </p>
+                        
+                        <p class="control has-icon has-icon-right">
+                            <label class="control-label">Distance sur le rang (en centimètre)</label>
+                            <input data-vv-scope="form-2" data-vv-as="La distance" v-validate:nDistanceSurRang.initial="'required|decimal'" :class="{'input': true, 'is-danger': errors.has('form-2.nDistanceSurRang') }" type="number" name="nDistanceSurRang" min="1" max="200" v-model="nDistanceSurRang">
+                            <i v-show="errors.has('form-2.nDistanceSurRang')" class="fa fa-warning"></i>
+                            <span v-show="errors.has('form-2.nDistanceSurRang')" class="alert alert-danger">{{ errors.first('form-2.nDistanceSurRang') }}</span>
+                        </p>
+                        
+                        <div v-if="index_modalite > 1" class="panel panel-primary">
+                            <div class="panel-heading">
+                              <h3 class="panel-title">Repiquages</h3>
+                            </div>
+                            <div class="panel-body">
+                                <table v-if="repiquages.length" class="table table-bordered">
+                                    <tbody>
+                                        <tr class="active">
+                                            <th class="text-center">Début</th>
+                                            <th class="text-center">Fin</th>
+                                            <th class="text-center">Commentaire</th>
+                                            <th class="text-center">Action</th>
+                                        </tr>
+                                        <tr v-for="(repiquage, index) in repiquages">
+                                            <td>{{ repiquage.debut_repi }}</td>
+                                            <td>{{ repiquage.fin_repi }}</td>
+                                            <td>{{ repiquage.repi_commentaire }}</td>
+                                            <td class="text-center"><button v-on:click="removeRepiquage(index)" type="button" class="btn btn-danger">Supprimer</button></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <p class="control has-icon has-icon-right">
+                                    <label class="control-label">Début repiquage (Numéro de semaine)</label>
+                                    <input data-vv-scope="form-4" data-vv-as="Le numéro de semaine" v-validate:nRepiquageDebut.initial="'required|decimal'" :class="{'input': true, 'is-danger': errors.has('form-4.nRepiquageDebut') }" type="number" name="nRepiquageDebut" min="1" max="52" v-model="nRepiquageDebut">
+                                    <i v-show="errors.has('form-4.nRepiquageDebut')" class="fa fa-warning"></i>
+                                    <span v-show="errors.has('form-4.nRepiquageDebut')" class="alert alert-danger">{{ errors.first('form-4.nRepiquageDebut') }}</span>
+                                </p>
+                                <p class="control has-icon has-icon-right">
+                                    <label class="control-label">Fin repiquage (Numéro de semaine)</label>
+                                    <input data-vv-scope="form-4" data-vv-as="Le numéro de semaine" v-validate:nRepiquageFin.initial="'required|decimal'" :class="{'input': true, 'is-danger': errors.has('form-4.nRepiquageFin') }" type="number" name="nRepiquageFin" min="1" max="52" v-model="nRepiquageFin">
+                                    <i v-show="errors.has('form-4.nRepiquageFin')" class="fa fa-warning"></i>
+                                    <span v-show="errors.has('form-4.nRepiquageFin')" class="alert alert-danger">{{ errors.first('form-4.nRepiquageFin') }}</span>
+                                </p>
+                                <p class="control has-icon has-icon-right">
+                                    <label class="control-label">Commentaire</label><br>
+                                    <textarea rows="6" cols="40" data-vv-scope="form-4" data-vv-as="Le commentaire" v-validate:nRepiquageCom.initial="'required|max:1000'" :class="{'input': true, 'is-danger': errors.has('form-4.nRepiquageCom') }" type="text" name="nRepiquageCom" v-model="nRepiquageCom" placeholder="Commentaire sur ce repiquage"></textarea>
+                                    <i v-show="errors.has('form-4.nRepiquageCom')" class="fa fa-warning"></i>
+                                    <span v-show="errors.has('form-4.nRepiquageCom')" class="alert alert-danger">{{ errors.first('form-4.nRepiquageCom') }}</span>
+                                </p>
+                            <button v-on:click="addRepiquage" type="button" class="btn btn-primary">Ajouter</button>
+                            </div>
+                        </div>
+                        
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                              <h3 class="panel-title">Protection de la culture</h3>
+                            </div>
+                            <div class="panel-body">
+                                <table v-if="tunnels.length" class="table table-bordered">
+                                    <tbody>
+                                        <tr class="active">
+                                            <th class="text-center">Type de tunnel ou voile</th>
+                                            <th class="text-center">Début</th>
+                                            <th class="text-center">Fin</th>
+                                            <th class="text-center">Commentaire</th>
+                                            <th class="text-center">Action</th>
+                                        </tr>
+                                        <tr v-for="(tunnel, index) in tunnels">
+                                            <td>{{ tunnel.type_tunnel }}</td>
+                                            <td>{{ tunnel.debut_tunnel }}</td>
+                                            <td>{{ tunnel.fin_tunnel }}</td>
+                                            <td>{{ tunnel.commentaire_tunnel }}</td>
+                                            <td class="text-center"><button v-on:click="removeTunnel(index)" type="button" class="btn btn-danger">Supprimer</button></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <p class="control has-icon has-icon-right">
+                                    <label class="control-label">Type (tunnel de forçage, voile de protection etc.)</label>
+                                    <input data-vv-scope="form-3" data-vv-as="Le type" v-validate:nType.initial="'required|max:200'" :class="{'input': true, 'is-danger': errors.has('form-3.nType') }" type="text" name="nType" v-model="nType" placeholder="Titre de votre choix">
+                                    <i v-show="errors.has('form-3.nType')" class="fa fa-warning"></i>
+                                    <span v-show="errors.has('form-3.nType')" class="alert alert-danger">{{ errors.first('form-3.nType') }}</span>
+                                </p>
+                                <p class="control has-icon has-icon-right">
+                                    <label class="control-label">Début tunnel (Numéro de semaine)</label>
+                                    <input data-vv-scope="form-3" data-vv-as="Le numéro de semaine" v-validate:nTunnelDebut.initial="'required|decimal'" :class="{'input': true, 'is-danger': errors.has('form-3.nTunnelDebut') }" type="number" name="nTunnelDebut" min="1" max="52" v-model="nTunnelDebut">
+                                    <i v-show="errors.has('form-3.nTunnelDebut')" class="fa fa-warning"></i>
+                                    <span v-show="errors.has('form-3.nTunnelDebut')" class="alert alert-danger">{{ errors.first('form-3.nTunnelDebut') }}</span>
+                                </p>
+                                <p class="control has-icon has-icon-right">
+                                    <label class="control-label">Fin tunnel (Numéro de semaine)</label>
+                                    <input data-vv-scope="form-3" data-vv-as="Le numéro de semaine" v-validate:nTunnelFin.initial="'required|decimal'" :class="{'input': true, 'is-danger': errors.has('form-3.nTunnelFin') }" type="number" name="nTunnelFin" min="1" max="52" v-model="nTunnelFin">
+                                    <i v-show="errors.has('form-3.nTunnelFin')" class="fa fa-warning"></i>
+                                    <span v-show="errors.has('form-3.nTunnelFin')" class="alert alert-danger">{{ errors.first('form-3.nTunnelFin') }}</span>
+                                </p>
+                                 <p class="control has-icon has-icon-right">
+                                    <label class="control-label">Commentaire</label><br>
+                                    <textarea rows="6" cols="40" data-vv-scope="form-3" data-vv-as="Le commentaire" v-validate:nTunnelCom.initial="'required|max:1000'" :class="{'input': true, 'is-danger': errors.has('form-3.nTunnelCom') }" type="text" name="nTunnelCom" v-model="nTunnelCom" placeholder="Commentaire sur ce tunnel"></textarea>
+                                    <i v-show="errors.has('form-3.nTunnelCom')" class="fa fa-warning"></i>
+                                    <span v-show="errors.has('form-3.nTunnelCom')" class="alert alert-danger">{{ errors.first('form-3.nTunnelCom') }}</span>
+                                </p>
+                            <button v-on:click="addTunnel" type="button" class="btn btn-primary">Ajouter</button>
+                            </div>
+                        </div>   
+                        <button v-on:click="addSemi" type="button" class="btn btn-primary">Ajouter</button>
+                    </div>
+                </div>
+                
             </fieldset>
-            
-            
             <br>
-            <button class="btn btn-primary btn-block" type="submit">Ajout de la variété</button>
+            <button v-if="semis.length" class="btn btn-primary btn-block" type="submit">Ajout de la variété</button>
+            <button v-else class="btn btn-primary btn-block disabled">Ajout de la variété (Déactivé, ajouter au moins un itinéraire)</button>
         </form>
         <div v-else>
-        <span class="alert alert-success">Variété ajouté avec succès !</span>
+        <div class="text-center alert alert-success">Variété ajouté avec succès !</div>
         <button class="btn btn-primary btn-block" v-on:click="addNewVariete">Ajouter une nouvelle variété</button>
         </div>		
     </div>

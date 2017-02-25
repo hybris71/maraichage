@@ -385,10 +385,7 @@
                     </div>
                     <div class="panel-body">
                         <ul>
-                        <? for (var i = 0; i < plante.get_list_variete().length; i++) { ?>
-                            <li><strong><a href="<?- urlPath ?>/<?- plante.get_list_variete()[i] ?>"><?- plante.get_list_variete()[i] ?></a></strong></li>
-                        
-                        <? } ?>
+                            <li v-for="variete in varietes"><strong><a v-bind:href="'<?- urlPath ?>/' + variete">{{ variete }}</a></strong></li>        
                         </ul>
                         <strong><a href="<?- urlPath ?>/add">Ajouter une nouvelle variété</a></strong>
                     </div>
