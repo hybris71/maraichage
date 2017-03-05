@@ -17,6 +17,7 @@ Actuellement nous avons :
 - La liste des plantes
 - La liste des variétés
 - Ajout de nouvelles plantes
+- Ajout d'une variété et de son itinéraire technique :
 - Modification des fiches plantes
 - Gestion des rotations sur votre exploitation :
  - Cette page permet de gérer comment l'application va vous proposer les bonnes planches :
@@ -28,10 +29,12 @@ En cours de développpement :
 - Page : Ajout des variétés 
 - Page : Affichage & Modification des variétés
 
+
 To-do :
+
 - Ajouter le Rendement espéré dans l'itinéaire du semi :
 	- Reflexions pour l'intégration :
-		- par mètre carré ? 
+		- Rendement par mètre carré/par hectare ?
 		- En fonction de la densité du semi et du temps de récolte ?
 
 - Ajouter les plages de recoltes :
@@ -39,17 +42,34 @@ To-do :
 		- Calculer avec un temps de croissance jusqu'à maturité ?
 		- Durée de la récolte : en semaine ? 
 
+- Ajouter les tâches de progression de la culture : tâches qui s'ajouteront au planning réel après avoir réaliser le semi et que l'application connait la planche et la date du semi réel :
+	- Exemple le buttage d'une planche de poireau ou le tuteurage d'une planche de tomate
+	- Tâches de tuteurage, tailles
+	- Buttages
+	- Déherbage lié à la variété
+	- Tâches diverses
+
+- Ajouter choix serre ou plein champ
+
+- Supprimer la plage de date pour le repiquage : supprimer fin_repi
+
+- Reflexion : Ajouter la possibilité de préremplir les champs d'un itinéraire technique avec les informations d'une autre variété.
+
+- Travail du sol : En réflexion :
+	- Les travaux du sol sont-ils à réaliser en fonction de la variété ? En fonction de la planche ? Une seule fois dans l'année pour une planche ? 
+	- Pour le moment, je m'arrête sur avant la mise en production d'une culture sur la planche, ils auront une page dédié avec des temps négatifs et seront ajouté au planning à partir de la mise en production de la variété sur une planche (le formulaire des variétés pourraient peut-êtré intégré les travaux mimimun du sol à réaliser)
+
 - Ajouter le stockage à l'itinéraire de la variété
-
-- Ajouter des tâches de tuteurage à l'itinéraire de la variété 
-
-- Ajouter Tâches diverses à l'itinéraire de la variété
 
 - Ajouter la validation "between" pour les données chiffrés dans les formulaires
 
 - A Corriger : 
 	- Formulaire Ajout d'une variété : Suppression du tableau repiquages quand un changement de modalité de semi à lieu après une première sélection 
-	- Page variete.htm hors service pour le moment
+
+- Modification d'une plante :
+	- Modification des champs : Engrais vert / Compagne à faire
+
+- AddPlante : Ajouter une liste pour le cycle de la plante (nouvelle table)
 
 Développement futur :
 - Page : Ajout des planches de culture & Modification

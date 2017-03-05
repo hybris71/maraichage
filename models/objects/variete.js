@@ -164,5 +164,29 @@
             return publics;
         }
     };
+    
+    privates.list_semi = [];
+    
+    publics.get_list_semi = function (get_list_semi) {
+        
+        return privates.list_semi;
+        
+    };
+    
+    publics.add = function (new_row, tab_to_modify) {
+     
+        var found = tab_to_modify.filter(function (item, i, arr) {
+                       
+            return item.id == new_row.id;
+                       
+        });
+                   
+        if (!found.length) {
+                 
+            tab_to_modify.push(new_row);
+                        
+        }                                     
+              
+    };	
 
 }));

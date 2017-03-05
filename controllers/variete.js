@@ -45,9 +45,12 @@ exports.setSockets = function () {
                             styleObjectOk: {
                                 display: 'none'
                             },
-                            id_variete: locals.variete.id_variete(),
-                            nom_variete: locals.variete.nom_variete(),
-                            description: locals.variete.description()
+                            id_variete: variete.id_variete(),
+                            nom_variete: variete.nom_variete(),
+                            description: variete.description(),
+                            graine_duree_vie: variete.graine_duree_vie(),
+                            graine_pmg: variete.graine_pmg(),
+                            semis: variete.get_list_semi()
                         }
                     });
 
@@ -81,7 +84,10 @@ exports.changeDom = function (next, locals) {
             },
             id_variete: locals.variete.id_variete(),
             nom_variete: locals.variete.nom_variete(),
-            description: locals.variete.description()
+            description: locals.variete.description(),
+            graine_duree_vie: locals.variete.graine_duree_vie(),
+            graine_pmg: locals.variete.graine_pmg(),
+            semis: locals.variete.get_list_semi()
         };
     
     fs.readFile(view, "utf-8", function (error, content) {
