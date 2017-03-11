@@ -17,18 +17,24 @@ Actuellement nous avons :
 - La liste des plantes
 - La liste des variétés
 - Ajout de nouvelles plantes
-- Ajout d'une variété et de son itinéraire technique :
+- Ajout d'une variété et de ses itinéraires techniques.
 - Modification des fiches plantes
-- Gestion des rotations sur votre exploitation :
+- Gestion des rotations sur l'exploitation :
  - Cette page permet de gérer comment l'application va vous proposer les bonnes planches :
   - Ajouter des rotations favorables et défavorables à vos plantes
 - Gestion des associations :
- - Cette page permet de gerer les associations favorables et défavorables pour chaque plante. Cela permettra, en fonction de vos choix et des problèmes de maladies ou ravageurs, vous proposez l'ajout de certaines plantes dans vos planches de culture.
+ - Cette page permet de gérer les associations favorables et défavorables pour chaque plante. Cela permettra, en fonction de vos choix et des problèmes de maladies ou ravageurs, vous proposez l'ajout de certaines plantes dans vos planches de culture.
 
 En cours de développpement :
 - Page : Ajout des variétés 
 - Page : Affichage & Modification des variétés
 
+Suite du développement :
+- Page : Ajout des planches de culture & Modification
+- Page : Ajout des productions envisagées (Choix des variétés et rendement souhaité) & Modification -> Cela générera les quantités de semences nécessaires, vérification de l'espace disponible sur les planches etc...
+- Page : Ajout des tâches qui pourront être associés aux planches ?
+- Pour chaque production, application du choix idéal de la planche et création du planning des tâches associées
+...
 
 To-do :
 
@@ -63,6 +69,8 @@ To-do :
 
 - Ajouter la validation "between" pour les données chiffrés dans les formulaires
 
+- Ajouter des boutons "Annuler" pour les modifications.
+
 - A Corriger : 
 	- Formulaire Ajout d'une variété : Suppression du tableau repiquages quand un changement de modalité de semi à lieu après une première sélection 
 
@@ -71,12 +79,9 @@ To-do :
 
 - AddPlante : Ajouter une liste pour le cycle de la plante (nouvelle table)
 
-Développement futur :
-- Page : Ajout des planches de culture & Modification
-- Page : Ajout des productions envisagées (Choix des variétés et rendement souhaité) & Modification -> Cela générera les quantités de semences nécessaires, vérification de l'espace disponible sur les planches.
-- Page : Ajout des tâches qui pourront être associés aux planches ?
-- Pour chaque production, application du choix idéal de la planche et création du planning des tâches associés
-...
+- Correction : Quand une variété ne contient pas d'itinéraire, ne pas afficher le tableau.
+
+
 
 
 ## Installation ##

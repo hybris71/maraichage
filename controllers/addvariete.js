@@ -167,51 +167,6 @@ exports.setSockets = function () {
                                     });
                         });
                 });
-                
-                
-                
-           
-            
-                
-            
-            
-/*            NA.mySql.getConnection(function(err, connection) {
-                if (err) {
-                    throw err;
-                }
-
-                variete
-                    .createVariete(function (infos) {
-
-                    // On récupère les variations spécifiques
-                    locals = NA.specific("addvariete.json", undefined);
-                    // On récupère les variations
-                    // variations = NA.common(data.lang, variations);
-                    //locals.plante = plante;
-                    //console.log(locals);
-                    // On récupère le fragment HTML depuis le dossier `viewsRelativePath` et on applique les variations.
-                    //locals.urlPath = data.urlPath;
-
-                    render = NA.view("addvariete.htm", locals);
-                    //console.log(render);
-                
-                    io.sockets.emit("add-variete", {
-                        view: render,                            
-                        data: {
-                            nom_plante: plante.nom_plante(),
-                            id_plante: plante.id_plante(),
-                            nom_variete: '',
-                            description: '',
-                            duree_vie: '1',
-                            pmg: '1',
-                            formSubmitted: true
-                        }
-                    }); 
-                                        
-                });
-               
-            });*/
-        
         });
     });
 };

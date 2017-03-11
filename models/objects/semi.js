@@ -110,6 +110,15 @@
             return publics;
         }
     };
+    
+    publics.rendement = function (rendement) {
+        if (typeof rendement === 'undefined') {
+            return privates.rendement;
+        } else {
+            privates.rendement = rendement;
+            return publics;
+        }
+    };
 
     publics.distance_entre_rang = function (distance_entre_rang) {
         if (typeof distance_entre_rang === 'undefined') {
@@ -125,6 +134,15 @@
             return privates.distance_sur_rang;
         } else {
             privates.distance_sur_rang = distance_sur_rang;
+            return publics;
+        }
+    };
+    
+    publics.id_repiquage = function (id_repiquage) {
+        if (typeof id_repiquage === 'undefined') {
+            return privates.id_repiquage;
+        } else {
+            privates.id_repiquage = id_repiquage;
             return publics;
         }
     };
