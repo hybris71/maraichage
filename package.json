@@ -1,6 +1,6 @@
 {
   "name": "maraichage",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Gestion d'exploitation de maraîchage diversifié",
   "main": "server.js",
   "scripts": {

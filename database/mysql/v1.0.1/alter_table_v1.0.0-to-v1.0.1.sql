@@ -14,3 +14,4 @@ ALTER TABLE `tunnels` CHANGE `type` `type_tunnel` VARCHAR(200) CHARACTER SET lat
 ALTER TABLE `tunnels` CHANGE `ref_variete` `ref_semi` INT(11) NOT NULL;
 ALTER TABLE `semis` DROP INDEX `id_plante`, ADD INDEX `id_variete` (`ref_variete`) USING BTREE;
 ALTER TABLE `semis` DROP FOREIGN KEY `semis_ibfk_1`
+ALTER TABLE `graines` CHANGE `prix` `prix` INT(11) NULL;

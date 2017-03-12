@@ -79,9 +79,30 @@
                     
                 },
                 addRepiquage: function () {
+                    
+                    var self = this;
               
                     this.$validator.validateAll('form-4').then(() => {
+                        
+                        NA.socket.once("add-repiquage", function (data) {
+                    
+                            self.nRepiquageId = data.id_repiquage;
+                            console.log("socket on add repiquage : " + self.nRepiquageId);
                             
+                            self.repiquages.push({
+                                "id": self.nRepiquageId,
+                                "debut_repi": self.nRepiquageDebut,
+                                "fin_repi": self.nRepiquageFin,
+                                "repi_commentaire": self.nRepiquageCom
+                            });
+                            
+                            self.nRepiquageId = undefined;
+                            self.nRepiquageDebut = '1';
+                            self.nRepiquageFin = '1';
+                            self.nRepiquageCom = 'Commentaire';
+                
+                        });
+                        
                         NA.socket.emit("add-repiquage", {
                             "id_semi": this.currentSemi.id_semi,
                             "debut_repi": this.nRepiquageDebut,
@@ -89,26 +110,13 @@
                             "repi_commentaire": this.nRepiquageCom                            
                         });
                         
-                        NA.socket.on("add-repiquage", function (data) {
-                    
-                            this.nRepiquageId = data.id_repiquage;
-                            console.log("socket on add repiquage : " + data.id_repiquage);
-                
-                        });
-                        
-                       this.action = "displaySemi";
-                    
-                        if (callback) {
-                            callback(data);
-                        }
-                        
                     });  
                 },
                 removeRepiquage: function (index) {
                     
                     NA.socket.emit("remove-repiquage", { 
-                            "id_repiquage": this.repiquages[index].id
-                        });
+                        "id_repiquage": this.repiquages[index].id
+                    });
                     
                     this.repiquages.splice(index, 1);
                 },
@@ -121,9 +129,32 @@
                     
                 },
                 addTunnel: function () {
+                    
+                    var self = this;
               
                     this.$validator.validateAll('form-3').then(() => {
+                        
+                        NA.socket.once("add-tunnel", function (data) {
+                    
+                            self.nTunnelId = data.id_tunnel;
+                            console.log("socket once add tunnel : " + self.nTunnelId);
                             
+                            self.tunnels.push({
+                                "id": self.nTunnelId,
+                                "type_tunnel": self.nTunnelType,
+                                "debut_tunnel": self.nTunnelDebut,
+                                "fin_tunnel": self.nTunnelFin,
+                                "commentaire_tunnel": self.nTunnelCom
+                            });
+                            
+                            self.nTunnelId = undefined;
+                            self.nTunnelType = 'Type';
+                            self.nTunnelDebut = '1';
+                            self.nTunnelFin = '1';
+                            self.nTunnelCom = 'Commentaire';
+                            
+                        });
+                        
                         NA.socket.emit("add-tunnel", {
                             "id_semi": this.currentSemi.id_semi,
                             "type_tunnel": this.nTunnelType,
@@ -131,27 +162,14 @@
                             "fin_tunnel": this.nTunnelFin,
                             "commentaire_tunnel": this.nTunnelCom                            
                         });
-                                                
-                        NA.socket.on("add-tunnel", function (data) {
-                    
-                            this.nTunnelId = data.id_tunnel;
-                            console.log("socket on add tunnel : " + data.id_tunnel);
-                            
-                        });
-                        
-                        this.action = "displaySemi";
-                    
-                        if (callback) {
-                            callback(data);
-                        }
                         
                     });  
                 },
                 removeTunnel: function (index) {
                     
-                    NA.socket.emit("remove-tunnel", { 
-                            "id_tunnel": this.tunnels[index].id
-                        });
+                    NA.socket.emit("remove-tunnel", {
+                        "id_tunnel": this.tunnels[index].id
+                    });
                     
                     this.tunnels.splice(index, 1);
                 }

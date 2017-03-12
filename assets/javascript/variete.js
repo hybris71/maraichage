@@ -27,19 +27,24 @@ NA.socket.on("get-variete", function (data) {
                 
             });
             variete.$mount(".main");
-            NA.socket.on("update-variete", function (data) {
+            NA.socket.once("update-variete", function (data) {
                 
                 console.log("socket on update plante");
                 
             });
+
             NA.socket.on("display-semi", function (data) {
-                
+
                 console.log("return display-semi");
-                
+
                 variete.currentSemi = data.data.currentSemi;
                 variete.repiquages = data.data.repiquages;
                 variete.tunnels = data.data.tunnels;
                 variete.listModalites = data.data.listModalites;
                 variete.index_modalite = data.data.index_modalite;
+
             });
 });
+
+
+

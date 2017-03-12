@@ -79,8 +79,6 @@ To-do :
 
 - AddPlante : Ajouter une liste pour le cycle de la plante (nouvelle table)
 
-- Correction : Quand une variété ne contient pas d'itinéraire, ne pas afficher le tableau.
-
 
 
 
