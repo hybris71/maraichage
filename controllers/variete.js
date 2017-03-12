@@ -50,18 +50,7 @@ exports.setSockets = function () {
                                     editCurrentSemi: false,
                                     addFieldRepiquage: false,
                                     addFieldTunnel: false,
-                                    styleObjectEdit: {
-                                        display: 'block'
-                                    },
-                                    styleObjectOk: {
-                                        display: 'none'
-                                    },
-                                    styleEditSemi: {
-                                        display: 'block'
-                                    },
-                                    styleSaveSemi: {
-                                        display: 'none'
-                                    },
+                                    addFieldItineraire: false,
                                     displayCurrentSemi: false,
                                     action: "",
                                     indexSemi: 0,
@@ -368,18 +357,7 @@ exports.setSockets = function () {
                                                             editCurrentSemi: false,
                                                             addFieldRepiquage: false,
                                                             addFieldTunnel: false,
-                                                            styleObjectEdit: {
-                                                                display: 'block'
-                                                            },
-                                                            styleObjectOk: {
-                                                                display: 'none'
-                                                            },
-                                                            styleEditSemi: {
-                                                                display: 'block'
-                                                            },
-                                                            styleSaveSemi: {
-                                                                display: 'none'
-                                                            },
+                                                            addFieldItineraire: false,
                                                             displayCurrentSemi: true,
                                                             action: "",
                                                             indexSemi: 0,
@@ -451,18 +429,7 @@ exports.changeDom = function (next, locals) {
             editCurrentSemi: false,
             addFieldRepiquage: false,
             addFieldTunnel: false,
-            styleObjectEdit: {
-                display: 'block'
-            },
-            styleObjectOk: {
-                display: 'none'
-            },
-            styleEditSemi: {
-                display: 'block'
-            },
-            styleSaveSemi: {
-                display: 'none'
-            },
+            addFieldItineraire: false,
             displayCurrentSemi: false,
             action: "",
             indexSemi: 0,

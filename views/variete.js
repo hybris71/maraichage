@@ -5,10 +5,13 @@
             template: view,
             data: data,
             methods: {
-                changeEdit: function () {     
-                    this.edit = true;
-                    this.styleObjectEdit.display = "none";
-                    this.styleObjectOk.display = "block";
+                editVariete: function () {   
+                    if (this.edit == true) {
+                        this.edit = false;
+                        NA.socket.emit("get-variete", data);
+                    } else {
+                        this.edit = true;
+                    }
                 },
                 validateBeforeSave(e) {
                 
@@ -21,8 +24,6 @@
                 saveVariete: function () {
                     this.action = "saveVariete";
                     this.edit = false;
-                    this.styleObjectEdit.display = "block";
-                    this.styleObjectOk.display = "none";
                     
                     if (callback) {
                         callback(data);
@@ -30,6 +31,8 @@
                 },
                 displaySemi: function (index) {
                     this.displayCurrentSemi = true;
+                    this.editCurrentSemi = false;
+                    this.addFieldItineraire = false;
                     this.action = "displaySemi";
                     this.indexSemi = index;
                     
@@ -37,10 +40,13 @@
                         callback(data);
                     }
                 },
-                changeStyleEditSemi: function () {     
-                    this.editCurrentSemi = true;
-                    this.styleEditSemi.display = "none";
-                    this.styleSaveSemi.display = "block";
+                editSemi: function () {
+                    if (this.editCurrentSemi == true) {
+                        this.editCurrentSemi = false;
+                        NA.socket.emit("display-semi", data);
+                    } else {
+                        this.editCurrentSemi = true;
+                    }
                 },
                 validateBeforeSaveSemi(e) {
                 
@@ -53,8 +59,7 @@
                 saveSemi: function () {
                     this.action = "saveSemi";
                     this.editCurrentSemi = false;
-                    this.styleEditSemi.display = "block";
-                    this.styleSaveSemi.display = "none";
+                    
                     this.currentSemi.type_semi = this.listModalites[this.index_modalite].description;
                     
                     var id_semi_temp = this.currentSemi.id_semi;
@@ -172,6 +177,16 @@
                     });
                     
                     this.tunnels.splice(index, 1);
+                },
+                addFieldItineraireButton: function () {
+                    this.displayCurrentSemi = false;
+                    this.editCurrentSemi = false;
+                    this.edit = false;
+                    this.addFieldItineraire = true;                    
+                },
+                removeFieldItineraireButton: function () {    
+                    this.addFieldItineraire = false;
+                    
                 }
             }
         });

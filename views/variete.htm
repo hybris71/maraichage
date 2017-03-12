@@ -2,8 +2,7 @@
         <h1><?- specific.titlePage ?></h1>
         <?- specific.content ?>
         
-        
-        <p><button class="btn btn-warning" v-on:click="changeEdit" v-bind:style="styleObjectEdit">Modifier</button><button class="btn btn-danger" id="save" v-on:click="validateBeforeSave" v-bind:style="styleObjectOk">Sauvegarder</button></p>
+        <p><button v-if="edit === false" class="btn btn-warning" v-on:click="editVariete">Modifier</button><button v-if="edit === true" class="btn btn-danger" v-on:click="validateBeforeSave">Sauvegarder</button> <button v-if="edit === true" class="btn btn-info" v-on:click="editVariete">Annuler</button></p>
         
         <template v-if="edit === true">
             <ul class="list-group">
@@ -93,7 +92,7 @@
                                 <tbody>
                                     <tr>
                                         <th>Action</th>
-                                        <td><button class="btn btn-warning" v-on:click="changeStyleEditSemi" v-bind:style="styleEditSemi">Modifier</button><button class="btn btn-danger" v-on:click="validateBeforeSaveSemi" v-bind:style="styleSaveSemi">Sauvegarder</button></td>
+                                        <td><button v-if="editCurrentSemi === false" class="btn btn-warning" v-on:click="editSemi">Modifier</button><button v-if="editCurrentSemi === true" class="btn btn-danger" v-on:click="validateBeforeSaveSemi">Sauvegarder</button> <button v-if="editCurrentSemi === true" class="btn btn-info" v-on:click="editSemi">Annuler</button></td>
                                     </tr>
                                     <tr>
                                         <th>ID de l'itinéraire</th>
@@ -323,6 +322,32 @@
                         </div>
                     </div>
                 </template>
+                <button v-if="addFieldItineraire === false" v-on:click="addFieldItineraireButton" type="button" class="btn btn-primary">Ajouter un nouvel itinéraire</button>
+                
+                <template v-if="addFieldItineraire === true">
+                    
+                    <div class="panel panel-primary">
+                        
+                        <div class="panel-heading">
+                          <h3 class="panel-title">Itinéraire</h3>
+                        </div>
+                        
+                        <div class="panel-body">
+
+                            <p class="control has-icon has-icon-right">
+                                <label class="control-label">Titre</label>
+                                <input data-vv-scope="form-2" data-vv-as="Le titre" v-validate:newSemiTitre.initial="'required|max:100'" :class="{'input': true, 'is-danger': errors.has('form-2.newSemiTitre') }" type="text" name="newSemiTitre" v-model="newSemiTitre" placeholder="Titre de votre choix">
+                                <i v-show="errors.has('form-2.newSemiTitre')" class="fa fa-warning"></i>
+                                <span v-show="errors.has('form-2.newSemiTitre')" class="alert alert-danger">{{ errors.first('form-2.newSemiTitre') }}</span>
+                            </p>
+                            
+                            <button type="button" class="btn btn-primary">Ajouter</button> 
+                            <button v-if="addFieldItineraire === true" v-on:click="removeFieldItineraireButton" type="button" class="btn btn-info">Annuler</button>
+                        </div>
+                    </div>
+                  
+                </template>
+                
                 
                 
             
