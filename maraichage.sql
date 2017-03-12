@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Client :  localhost
--- Généré le :  Lun 20 Février 2017 à 15:02
+-- Généré le :  Dim 12 Mars 2017 à 18:44
 -- Version du serveur :  5.5.53-MariaDB
 -- Version de PHP :  5.6.28
 
@@ -176,11 +176,18 @@ INSERT INTO `familles` (`id_famille`, `nom_famille`) VALUES
 CREATE TABLE `graines` (
   `id_graine` int(11) NOT NULL,
   `pmg` int(11) NOT NULL,
-  `prix` int(11) NOT NULL,
-  `taux_germi` int(11) NOT NULL,
+  `prix` int(11) DEFAULT NULL,
   `duree_vie` int(11) NOT NULL,
   `ref_variete` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `graines`
+--
+
+INSERT INTO `graines` (`id_graine`, `pmg`, `prix`, `duree_vie`, `ref_variete`) VALUES
+(4, 3, 0, 5, 6),
+(5, 3, 0, 5, 7);
 
 -- --------------------------------------------------------
 
@@ -396,13 +403,6 @@ CREATE TABLE `recoltes` (
   `ref_semi` int(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Contenu de la table `recoltes`
---
-
-INSERT INTO `recoltes` (`id_recolte`, `debut_recolte`, `fin_recolte`, `deroulement`, `frequence_int`, `frequence_com`, `ref_semi`) VALUES
-(2, 7, 10, 'Récolte manuelle, fruit par fruit.', 2, 'Deux fois par semaine et quelques fois trois fois si le temps est chaud.', 1);
-
 -- --------------------------------------------------------
 
 --
@@ -413,7 +413,7 @@ CREATE TABLE `repiquages` (
   `id_repiquage` int(11) NOT NULL,
   `debut_repi` int(3) NOT NULL,
   `fin_repi` int(3) NOT NULL,
-  `repi_commentaire` varchar(10000) NOT NULL,
+  `repi_commentaire` varchar(1000) NOT NULL,
   `ref_semi` int(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -422,7 +422,7 @@ CREATE TABLE `repiquages` (
 --
 
 INSERT INTO `repiquages` (`id_repiquage`, `debut_repi`, `fin_repi`, `repi_commentaire`, `ref_semi`) VALUES
-(1, 4, 6, 'Les plants doivent faire 15 centimètre de haut.', 1);
+(2, 1, 1, 'Test', 5);
 
 -- --------------------------------------------------------
 
@@ -700,16 +700,26 @@ INSERT INTO `rotation_plante` (`id_rotation_plante`, `ref_plante`, `ref_plante_c
 
 CREATE TABLE `semis` (
   `id_semi` int(20) NOT NULL,
-  `ref_type_semis` int(5) NOT NULL,
+  `nom_semi` varchar(100) NOT NULL,
+  `ref_type_semi` int(5) NOT NULL,
   `distance_entre_rang` int(10) NOT NULL,
   `distance_sur_rang` int(10) NOT NULL,
   `profondeur` int(5) NOT NULL,
   `temps_levee_jour` int(11) NOT NULL,
   `temperature_germi` int(11) NOT NULL,
+  `taux_germi` int(20) NOT NULL,
+  `rendement` int(20) DEFAULT NULL,
   `debut_semi` int(2) NOT NULL,
   `fin_semi` int(2) NOT NULL,
   `ref_variete` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `semis`
+--
+
+INSERT INTO `semis` (`id_semi`, `nom_semi`, `ref_type_semi`, `distance_entre_rang`, `distance_sur_rang`, `profondeur`, `temps_levee_jour`, `temperature_germi`, `taux_germi`, `rendement`, `debut_semi`, `fin_semi`, `ref_variete`) VALUES
+(5, 'Plein champ', 1, 1, 1, 1, 1, 1, 90, NULL, 1, 1, 7);
 
 -- --------------------------------------------------------
 
@@ -735,11 +745,19 @@ CREATE TABLE `stockage` (
 
 CREATE TABLE `tunnels` (
   `id_tunnel` int(11) NOT NULL,
-  `type` varchar(20) NOT NULL,
-  `tunnel_debut` date NOT NULL,
-  `tunnel_fin` date NOT NULL,
-  `ref_variete` int(11) NOT NULL
+  `type_tunnel` varchar(200) NOT NULL,
+  `debut_tunnel` int(20) NOT NULL,
+  `fin_tunnel` int(20) NOT NULL,
+  `commentaire_tunnel` varchar(1000) NOT NULL,
+  `ref_semi` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `tunnels`
+--
+
+INSERT INTO `tunnels` (`id_tunnel`, `type_tunnel`, `debut_tunnel`, `fin_tunnel`, `commentaire_tunnel`, `ref_semi`) VALUES
+(4, 'Test', 1, 1, 'Test', 5);
 
 -- --------------------------------------------------------
 
@@ -775,10 +793,17 @@ INSERT INTO `type_semis` (`id_type_semi`, `type_semi_description`) VALUES
 CREATE TABLE `varietes` (
   `id_variete` int(11) NOT NULL,
   `nom_variete` varchar(50) NOT NULL,
-  `description` varchar(200) NOT NULL,
-  `rendement` int(100) NOT NULL,
+  `description` varchar(2000) NOT NULL,
   `ref_plante` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `varietes`
+--
+
+INSERT INTO `varietes` (`id_variete`, `nom_variete`, `description`, `ref_plante`) VALUES
+(6, 'Marmande', 'Croissance mi-déterminée.\\nPrécoce.\\nCycle de 65 jours.\\nPoids moyen : 180 g. Calibre de 77.\\nTrès populaire en France. Fruit rond à aplati côtelé, très bonne résistance aux maladies communes.\\nCroissance vigoureuse.\\nCouleur rouge. Chair douce et savoureuse.\\nNouaison et fructification même à basses températures.', 30),
+(7, 'Saint Pierre', 'Croissance indéterminée.\\nMi-précoce.\\nGros fruit rond, de très belle qualité, régulier de calibre 57-67.\\nPoids moyen 110 g.\\nChair ferme et juteuse.\\nTrès bon goût. Couleur rouge vif.\\nGrosse production échelonnée.\\nTrès adaptée pour le marché de frais et pour la conserverie.', 30);
 
 --
 -- Index pour les tables exportées
@@ -891,8 +916,8 @@ ALTER TABLE `rotation_plante`
 --
 ALTER TABLE `semis`
   ADD PRIMARY KEY (`id_semi`),
-  ADD KEY `id_plante` (`ref_variete`),
-  ADD KEY `type_semis` (`ref_type_semis`);
+  ADD KEY `type_semis` (`ref_type_semi`),
+  ADD KEY `id_variete` (`ref_variete`) USING BTREE;
 
 --
 -- Index pour la table `stockage`
@@ -906,7 +931,7 @@ ALTER TABLE `stockage`
 --
 ALTER TABLE `tunnels`
   ADD PRIMARY KEY (`id_tunnel`),
-  ADD KEY `id_plante` (`ref_variete`);
+  ADD KEY `id_plante` (`ref_semi`);
 
 --
 -- Index pour la table `type_semis`
@@ -943,7 +968,7 @@ ALTER TABLE `familles`
 -- AUTO_INCREMENT pour la table `graines`
 --
 ALTER TABLE `graines`
-  MODIFY `id_graine` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_graine` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT pour la table `groupes`
 --
@@ -983,7 +1008,7 @@ ALTER TABLE `recoltes`
 -- AUTO_INCREMENT pour la table `repiquages`
 --
 ALTER TABLE `repiquages`
-  MODIFY `id_repiquage` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_repiquage` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT pour la table `rotation_duree`
 --
@@ -1003,7 +1028,7 @@ ALTER TABLE `rotation_plante`
 -- AUTO_INCREMENT pour la table `semis`
 --
 ALTER TABLE `semis`
-  MODIFY `id_semi` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_semi` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT pour la table `stockage`
 --
@@ -1013,7 +1038,7 @@ ALTER TABLE `stockage`
 -- AUTO_INCREMENT pour la table `tunnels`
 --
 ALTER TABLE `tunnels`
-  MODIFY `id_tunnel` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_tunnel` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT pour la table `type_semis`
 --
@@ -1023,7 +1048,7 @@ ALTER TABLE `type_semis`
 -- AUTO_INCREMENT pour la table `varietes`
 --
 ALTER TABLE `varietes`
-  MODIFY `id_variete` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_variete` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- Contraintes pour les tables exportées
 --
@@ -1033,12 +1058,6 @@ ALTER TABLE `varietes`
 --
 ALTER TABLE `pedoclimat`
   ADD CONSTRAINT `pedoclimat_ibfk_1` FOREIGN KEY (`ref_plante`) REFERENCES `plantes` (`id_plante`);
-
---
--- Contraintes pour la table `semis`
---
-ALTER TABLE `semis`
-  ADD CONSTRAINT `semis_ibfk_1` FOREIGN KEY (`ref_variete`) REFERENCES `plantes` (`id_plante`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
