@@ -62,12 +62,12 @@
                     </div>
                 </div>
             </template>
-                <div class = "panel panel-primary">
+                <div v-if="semis.length" class = "panel panel-primary">
                     <div class = "panel-heading">
                         <h3 class = "panel-title">Itinéraires</h3>
                     </div>
                     <div class = "panel-body">
-                        <table v-if="semis.length" class="table table-bordered">
+                        <table class="table table-bordered">
                             <tbody>
                                 <tr class="active">
                                     <th class="text-center">ID de l'itinéraire</th>

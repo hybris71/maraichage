@@ -38,10 +38,11 @@ Suite du développement :
 
 To-do :
 
-- Ajouter le Rendement espéré dans l'itinéaire du semi :
+- Ajouter le Rendement espéré dans l'itinéraire du semi :
 	- Reflexions pour l'intégration :
 		- Rendement par mètre carré/par hectare ?
 		- En fonction de la densité du semi et du temps de récolte ?
+        - Conclusion à ce jour : Demander le rendement avec la période de récolte, à estimer au m² sur la durée de récolte choisie.
 
 - Ajouter les plages de recoltes :
 	- Reflexions pour l'intégration :
@@ -57,7 +58,7 @@ To-do :
 
 - Ajouter choix serre ou plein champ
 
-- Supprimer la plage de date pour le repiquage : supprimer fin_repi
+- Supprimer la plage de date pour le repiquage : supprimer fin_repi ?
 
 - Reflexion : Ajouter la possibilité de préremplir les champs d'un itinéraire technique avec les informations d'une autre variété.
 

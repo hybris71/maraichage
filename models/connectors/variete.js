@@ -131,14 +131,17 @@ function Variete(connection) {
                         }
         
                         for (var i = 0; i < rows.length; i++) {
-               
-                            var new_semi = {
+                            
+                            if (rows[i].id_semi) {
+                                
+                                var new_semi = {
                                     id: rows[i].id_semi,
                                     nom: rows[i].nom_semi
-                               };
+                                };
 
-                            publics.add(new_semi, publics.get_list_semi());
-
+                                publics.add(new_semi, publics.get_list_semi());
+                                
+                            }
                         }
 
                     if(callback) {
